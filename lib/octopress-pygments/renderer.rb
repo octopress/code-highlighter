@@ -13,8 +13,8 @@ module Octopress
         @options[:title] ||= ' ' if @options[:url]
         cache = Cache.fetch_from_cache(code, options)
         unless cache
-         if @lang == 'plain'
-            code = code.gsub('<','&lt;')
+          if @lang == 'plain'
+            code = code.to_s.gsub('<','&lt;')
           else
             code = render_pygments(code, options[:lang]).match(/<pre>(.+)<\/pre>/m)[1].gsub(/ *$/, '') #strip out divs <div class="highlight">
           end

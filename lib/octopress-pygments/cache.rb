@@ -11,7 +11,7 @@ module Octopress
 
         def write_to_cache(contents, options)
           FileUtils.mkdir_p(PYGMENTS_CACHE_DIR) unless File.directory?(PYGMENTS_CACHE_DIR)
-          path = options[:cache_path] || get_cache_path(PYGMENTS_CACHE_DIR, options[:lang], options.to_s + code)
+          path = options[:cache_path] || get_cache_path(PYGMENTS_CACHE_DIR, options[:lang], options.to_s + contents)
           File.open(path, 'w') do |f|
             f.print(contents)
           end
