@@ -1,6 +1,8 @@
 module Octopress
   module Pygments
     class Renderer
+      attr_accessor :code, :options, :lang
+
       def initialize(code, options = {})
         @code    = code
         @options = options
@@ -9,7 +11,7 @@ module Octopress
 
       def highlight
         @options[:title] ||= ' ' if @options[:url]
-        cache = fetch_from_cache
+        cache = Cache.fetch_from_cache(code, options)
         unless cache
          if @lang == 'plain'
             code = code.gsub('<','&lt;')
@@ -19,7 +21,7 @@ module Octopress
           code = tableize_code(code, options[:lang], {linenos: options[:linenos], start: options[:start], marks: options[:marks]})
           title = captionize(options[:title], options[:url], options[:link_text]) if options[:title]
           code = "<figure class='code'>#{title}#{code}</figure>"
-          write_to_cache(code) unless options[:no_cache]
+          Cache.write_to_cache(code, options) unless options[:no_cache]
         end
         cache || code
       end
@@ -34,19 +36,6 @@ module Octopress
         lang = 'csharp' if lang == 'cs'
         lang = 'plain' if lang == '' or lang.nil? or !lang
         options[:lang] = lang
-      end
-
-      def fetch_from_cache
-        unless options[:no_cache]
-          path  = options[:cache_path] || get_cache_path(PYGMENTS_CACHE_DIR, options[:lang], options.to_s + code)
-          cache = read_cache(path)
-        end
-      end
-
-      def write_to_cache(text)
-        File.open(path, 'w') do |f|
-          f.print(text)
-        end
       end
 
       def render_pygments(code, lang)
