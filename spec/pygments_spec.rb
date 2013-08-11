@@ -73,7 +73,16 @@ EOF
   end
 
   let(:options) do
-    {}
+    {
+      lang: "ruby",
+      url:  "http://something.com/hi/fuaiofnioaf.html",
+      title: "Hello",
+      linenos: "yes",
+      marks: [5, 8, 9, 10, 15],
+      link_text: "get it here",
+      start: 5,
+      end: 15
+    }
   end
 
   describe ".highlight" do
@@ -89,11 +98,15 @@ EOF
   end
 
   describe ".highlight_failed" do
-    #described_class.highlight(code, options)
+    #described_class.highlight_failed(error, syntax, markup, code, file = nil)
   end
 
   describe ".parse_markup" do
-    #described_class.highlight(code, options)
+    context "with no defaults" do
+      it "parses the defaults correctly" do
+        expect(described_class.parse_markup(markup, {})).to eql(options)
+      end
+    end
   end
 
   describe ".clean_markup" do
