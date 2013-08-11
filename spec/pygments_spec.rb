@@ -107,6 +107,12 @@ EOF
         expect(described_class.parse_markup(markup, {})).to eql(options)
       end
     end
+
+    context "with defaults with a nil value" do
+      it "overrides the nil values" do
+        expect(described_class.parse_markup(markup, { lang: nil })).to eql(options)
+      end
+    end
   end
 
   describe ".clean_markup" do
