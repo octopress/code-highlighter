@@ -52,11 +52,6 @@ module Octopress
         encode_liquid(highlighted_code).to_s
       end
 
-      def encode_liquid(code)
-        code.gsub(/{{/, '&#x7b;&#x7b;')
-          .gsub(/{% /, '&#x7b;&#x25;') #FIXME: remove the space here
-      end
-
       def tableize_code (code, lang, options = {})
         start = options[:start] || 1
         lines = options[:linenos] || true
@@ -105,6 +100,11 @@ module Octopress
           code = code.split(/\n/).slice(start - 1, endline + 1 - start).join("\n")
         end
         code
+      end
+
+      def encode_liquid(code)
+        code.gsub(/{{/, '&#x7b;&#x7b;')
+          .gsub(/{%/, '&#x7b;&#x25;') #FIXME: remove the space here
       end
     end
   end
