@@ -1,2 +1,2 @@
 language: ruby
-script: bundle exec spec
+script: bundle exec rake spec
