@@ -14,16 +14,16 @@ module Octopress
         cache = Cache.fetch_from_cache(code, options)
         unless cache
           if @lang == 'plain'
-            code = code.to_s.gsub('<','&lt;')
+            rendered_code = code.to_s.gsub('<','&lt;')
           else
-            code = render_pygments(code, options[:lang]).match(/<pre>(.+)<\/pre>/m)[1].gsub(/ *$/, '') #strip out divs <div class="highlight">
+            rendered_code = render_pygments(code, options[:lang]).match(/<pre>(.+)<\/pre>/m)[1].gsub(/ *$/, '') #strip out divs <div class="highlight">
           end
-          code = tableize_code(code, options[:lang], {linenos: options[:linenos], start: options[:start], marks: options[:marks]})
+          rendered_code = tableize_code(rendered_code, options[:lang], {linenos: options[:linenos], start: options[:start], marks: options[:marks]})
           title = captionize(options[:title], options[:url], options[:link_text]) if options[:title]
-          code = "<figure class='code'>#{title}#{code}</figure>"
-          Cache.write_to_cache(code, options) unless options[:no_cache]
+          rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
+          Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
         end
-        cache || code
+        cache || rendered_code
       end
 
       def determine_lang
@@ -104,7 +104,7 @@ module Octopress
 
       def encode_liquid(code)
         code.gsub(/{{/, '&#x7b;&#x7b;')
-          .gsub(/{%/, '&#x7b;&#x25;') #FIXME: remove the space here
+          .gsub(/{%/, '&#x7b;&#x25;')
       end
     end
   end
