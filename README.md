@@ -1,4 +1,6 @@
-# Octopress::Pygments
+# Octopress Pygments
+
+[![Build Status](https://travis-ci.org/octopress/octopress-pygments.png)](https://travis-ci.org/octopress/octopress-pygments)
 
 TODO: Write a gem description
 
