@@ -20,7 +20,7 @@ module Octopress
       end
 
       def parse_markup(defaults = {})
-        defaults.merge({
+        options = {
           lang:      lang,
           url:       url,
           title:     title,
@@ -29,7 +29,9 @@ module Octopress
           link_text: link_text,
           start:     start,
           end:       endline
-        })
+        }
+        options = options.delete_if { |k,v| v.nil? }
+        defaults.merge(options)
       end
 
       def lang

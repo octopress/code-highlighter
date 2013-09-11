@@ -58,7 +58,7 @@ EOF
 
   let(:markup) do
     [
-      "lang:ruby",
+      "lang:abc",
       'title:"Hello"',
       "url:http://something.com/hi/fuaiofnioaf.html",
       "link_text:'get it here'",
@@ -86,7 +86,7 @@ EOF
 
   let(:options) do
     {
-      lang: "ruby",
+      lang: "abc",
       url:  "http://something.com/hi/fuaiofnioaf.html",
       title: "Hello",
       linenos: "yes",

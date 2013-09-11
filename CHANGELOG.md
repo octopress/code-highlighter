@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.1
+  - Fix: No longer overwriting options with `nil` in parse_markup
+
 ## 1.2.0
   - Added method for users to specify lexer aliases
   - Removed default aliases:
