@@ -6,36 +6,38 @@ module Octopress
       def initialize(code, options = {})
         @code    = code
         @options = options
-        @lang    = determine_lang
+        @aliases = @options[:aliases]
+        @aliases = (@aliases ? stringify_keys(@aliases) : {})
+        @lang    = determine_lang(@options[:lang])
       end
 
       def highlight
         @options[:title] ||= ' ' if @options[:url]
-        cache = Cache.fetch_from_cache(code, options)
+        cache = Cache.fetch_from_cache(code, @options)
         unless cache
           if @lang == 'plain'
             rendered_code = code.to_s.gsub('<','&lt;')
           else
-            rendered_code = render_pygments(code, options[:lang]).match(/<pre>(.+)<\/pre>/m)[1].gsub(/ *$/, '') #strip out divs <div class="highlight">
+            rendered_code = render_pygments(code, @lang).match(/<pre>(.+)<\/pre>/m)[1].gsub(/ *$/, '') #strip out divs <div class="highlight">
           end
-          rendered_code = tableize_code(rendered_code, options[:lang], {linenos: options[:linenos], start: options[:start], marks: options[:marks]})
-          title = captionize(options[:title], options[:url], options[:link_text]) if options[:title]
+          rendered_code = tableize_code(rendered_code, @lang, {linenos: @options[:linenos], start: @options[:start], marks: @options[:marks]})
+          title = captionize(@options[:title], @options[:url], @options[:link_text]) if @options[:title]
           rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
-          Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
+          Cache.write_to_cache(rendered_code, @options) unless @options[:no_cache]
         end
         cache || rendered_code
       end
 
-      def determine_lang
-        lang = options[:lang]
-        lang = 'ruby' if lang == 'ru'
-        lang = 'objc' if lang == 'm'
-        lang = 'perl' if lang == 'pl'
-        lang = 'yaml' if lang == 'yml'
-        lang = 'coffeescript' if lang == 'coffee'
-        lang = 'csharp' if lang == 'cs'
-        lang = 'plain' if lang == '' or lang.nil? or !lang
-        options[:lang] = lang
+      def determine_lang(lang)
+        if lang == '' or lang.nil? or !lang
+          lang = 'plain'
+        elsif ::Pygments::Lexer.find lang 
+          lang
+        elsif !@aliases[lang].nil? and ::Pygments::Lexer.find @aliases[lang]
+          @aliases[lang]
+        else
+          'plain'
+        end
       end
 
       def render_pygments(code, lang)
@@ -105,6 +107,23 @@ module Octopress
       def encode_liquid(code)
         code.gsub(/{{/, '&#x7b;&#x7b;')
           .gsub(/{%/, '&#x7b;&#x25;')
+      end
+
+      private
+
+      def stringify_keys(hash)
+        hash.inject({}){|result, (key, value)|
+          new_key = case key
+                    when String then key.to_s
+                    else key
+                    end
+        new_value = case value
+                    when Hash then stringify_keys(value)
+                    else value
+                    end
+        result[new_key] = new_value
+        result
+        }
       end
     end
   end

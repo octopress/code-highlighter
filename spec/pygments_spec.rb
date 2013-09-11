@@ -110,7 +110,7 @@ EOF
 
     context "with a language" do
       it "returns the right HTML for a given set of code" do
-        expect(described_class.highlight(code, { lang: 'ruby' })).to eql(expected_output_lang_ruby.chop)
+        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'} })).to eql(expected_output_lang_ruby.chop)
       end
     end
   end
