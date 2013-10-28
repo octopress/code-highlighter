@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.3
+  - Fixed: figcaptions now work when specifying a title.
+
 ## 1.2.2
   - Now you can call Pygments.read_cache directly.
   - Added an option to specify a label on cache files.

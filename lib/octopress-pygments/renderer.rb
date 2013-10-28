@@ -55,6 +55,12 @@ module Octopress
         encode_liquid(highlighted_code).to_s
       end
 
+      def captionize (caption, url, link_text)
+        figcaption  = "<figcaption>#{caption}"
+        figcaption += "<a href='#{url}'>#{(link_text || 'link').strip}</a>" if url
+        figcaption += "</figcaption>"
+      end
+
       def tableize_code (code, lang, options = {})
         start = options[:start] || 1
         lines = options[:linenos] || true
