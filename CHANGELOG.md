@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+  - Now you can call Pygments.read_cache directly.
+  - Added an option to specify a label on cache files.
+  - Simplified caching methods.
+
 ## 1.2.1
   - Fix: No longer overwriting options with `nil` in parse_markup
 

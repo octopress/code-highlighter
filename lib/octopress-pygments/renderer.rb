@@ -13,8 +13,9 @@ module Octopress
 
       def highlight
         @options[:title] ||= ' ' if @options[:url]
-        cache = Cache.fetch_from_cache(code, @options)
-        unless cache
+        if cache = Cache.read_cache(code, @options)
+          cache
+        else
           if @lang == 'plain'
             rendered_code = code.to_s.gsub('<','&lt;')
           else
@@ -24,8 +25,8 @@ module Octopress
           title = captionize(@options[:title], @options[:url], @options[:link_text]) if @options[:title]
           rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
           Cache.write_to_cache(rendered_code, @options) unless @options[:no_cache]
+          rendered_code
         end
-        cache || rendered_code
       end
 
       def determine_lang(lang)

@@ -17,6 +17,10 @@ module Octopress
       Renderer.new(code, options).highlight
     end
 
+    def self.read_cache(code, options={})
+      Cache.read_cache(code, options)
+    end
+
     def self.parse_markup(input, defaults={})
       OptionsParser.new(input).parse_markup(defaults)
     end
