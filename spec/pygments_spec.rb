@@ -93,8 +93,7 @@ EOF
       marks: [5, 8, 9, 10, 15],
       link_text: "get it here",
       start: 5,
-      end: 15,
-      escape: true
+      end: 15
     }
   end
 

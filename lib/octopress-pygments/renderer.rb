@@ -5,7 +5,8 @@ module Octopress
 
       def initialize(code, options = {})
         @code    = code
-        @options = options
+        @options = options.delete_if { |k,v| v.nil? }
+        @options = DEFAULTS.merge(@options)
         @aliases = @options[:aliases]
         @aliases = (@aliases ? stringify_keys(@aliases) : {})
         @lang    = determine_lang(@options[:lang])
@@ -24,14 +25,14 @@ module Octopress
           rendered_code = tableize_code(rendered_code, @lang, {linenos: @options[:linenos], start: @options[:start], marks: @options[:marks]})
           title = captionize(@options[:title], @options[:url], @options[:link_text]) if @options[:title]
           rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
-          rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if @options[:escape] != false
+          rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if @options[:escape]
           Cache.write_to_cache(rendered_code, @options) unless @options[:no_cache]
           rendered_code
         end
       end
 
       def determine_lang(lang)
-        if lang == '' or lang.nil? or !lang
+        if lang == ''
           lang = 'plain'
         elsif ::Pygments::Lexer.find lang 
           lang
@@ -63,9 +64,9 @@ module Octopress
       end
 
       def tableize_code (code, lang, options = {})
-        start = options[:start] || 1
-        lines = options[:linenos] || true
-        marks = options[:marks] || []
+        start = options[:start]
+        lines = options[:linenos]
+        marks = options[:marks]
         table = "<div class='highlight'><table><tr>"
         table += number_lines(start, code.lines.count, marks) if lines
         table += "<td class='main #{'unnumbered' unless lines} #{lang}'><pre>"

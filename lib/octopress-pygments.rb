@@ -9,6 +9,14 @@ FileUtils.mkdir_p(PYGMENTS_CACHE_DIR)
 
 module Octopress
   module Pygments
+    DEFAULTS = {
+      lang: 'plain',
+      linenos: true,
+      marks: [],
+      start: 1,
+      escape: true
+    }
+
     autoload :Cache,         'octopress-pygments/cache'
     autoload :OptionsParser, 'octopress-pygments/options_parser'
     autoload :Renderer,      'octopress-pygments/renderer'

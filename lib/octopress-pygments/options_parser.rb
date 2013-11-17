@@ -38,7 +38,7 @@ module Octopress
         options = options.delete_if { |k,v| v.nil? }
         defaults.merge(options)
       end
-
+      
       def lang
         extract(/\s*lang:\s*(\S+)/i)
       end
@@ -52,11 +52,11 @@ module Octopress
       end
 
       def linenos
-        boolize(extract(/\s*linenos:\s*(\w+)/i, [1], true))
+        boolize(extract(/\s*linenos:\s*(\w+)/i))
       end
 
       def escape
-        boolize(extract(/\s*escape:\s*(\w+)/i, [1], true))
+        boolize(extract(/\s*escape:\s*(\w+)/i))
       end
 
       # Public: Matches pattern for line marks and returns array of line
@@ -117,8 +117,9 @@ module Octopress
       end
 
       def boolize(str)
+        return nil if str.nil?
         return true if str == true || str =~ (/(true|t|yes|y|1)$/i)
-        return false if str == false || str !~ /[^[:space:]]/ || str =~ (/(false|f|no|n|0)$/i)
+        return false if str == false || str =~ (/(false|f|no|n|0)$/i) || str.strip.size > 1
         return str
       end
     end
