@@ -13,8 +13,7 @@ module Octopress
       lang: 'plain',
       linenos: true,
       marks: [],
-      start: 1,
-      escape: true
+      start: 1
     }
 
     autoload :Cache,         'octopress-pygments/cache'

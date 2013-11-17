@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+  - Fixed: line numbers now start at 1 instead of zero.
+  - Changed: `escape` option defaults to false.
+
 ## 1.3.0
   - Added `escape` option which wraps code in {% raw %} tags to escape liquid. Defaults to true.
 

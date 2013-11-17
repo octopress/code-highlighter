@@ -87,7 +87,9 @@ module Octopress
         if range
           range.first
         else
-          extract(/\s*start:\s*(\d+)/i, [1], 1).to_i
+          num = extract(/\s*start:\s*(\d+)/i)
+          num = num.to_i unless num.nil?
+          num
         end
       end
 
@@ -95,7 +97,9 @@ module Octopress
         if range
           range.last
         else
-          extract(/\s*end:\s*(\d+)/i).to_i
+          num = extract(/\s*end:\s*(\d+)/i)
+          num = num.to_i unless num.nil?
+          num
         end
       end
 

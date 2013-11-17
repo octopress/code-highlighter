@@ -84,7 +84,7 @@ module Octopress
       end
 
       def number_lines (start, count, marks)
-        start ||= 1
+        start
         lines = "<td class='line-numbers' aria-hidden='true'><pre>"
         count.times do |index|
           classes = 'line-number'
@@ -103,7 +103,7 @@ module Octopress
       #
       def get_range(code, start, endline)
         length    = code.lines.count
-        start   ||= 1
+        start
         endline ||= length
         if start > 1 or endline < length
           raise "#{filepath} is #{length} lines long, cannot begin at line #{start}" if start > length

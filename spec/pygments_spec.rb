@@ -4,7 +4,7 @@ describe Octopress::Pygments do
   let(:wrapper) do
     Proc.new do |stuff, numbers|
       [
-        "{% raw %}<figure class='code'>",
+        "<figure class='code'>",
         "<div class='highlight'>",
         "<table><tr>",
         "<td class='line-numbers' aria-hidden='true'>",
@@ -13,33 +13,33 @@ describe Octopress::Pygments do
         "<td class='main  plain'>",
         "<pre>#{stuff}</pre>",
         "</td></tr>",
-        "</table></div></figure>{% endraw %}"
+        "</table></div></figure>"
       ].join
     end
   end
 
   let(:expected_output_no_options) do
     stuff = <<-EOF
-{% raw %}<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>    require "hi-there-honey"
+<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>    require "hi-there-honey"
 </div><div class='line'> </div><div class='line'>    def hi-there-honey
 </div><div class='line'>      HiThereHoney.new("your name")
 </div><div class='line'>    end
 </div><div class='line'> </div><div class='line'>    hi-there-honey
 </div><div class='line'>    # => "Hi, your name"
-</div></pre></td></tr></table></div></figure>{% endraw %}
+</div></pre></td></tr></table></div></figure>
 EOF
     stuff.strip
   end
 
   let(:expected_output_lang_ruby) do
     stuff = <<-EOF
-<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  ruby'><pre><div class='line'>    <span class="nb">require</span> <span class="s2">&quot;hi-there-honey&quot;</span>
+{% raw %}<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  ruby'><pre><div class='line'>    <span class="nb">require</span> <span class="s2">&quot;hi-there-honey&quot;</span>
 </div><div class='line'> </div><div class='line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
 </div><div class='line'>      <span class="no">HiThereHoney</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
 </div><div class='line'>    <span class="k">end</span>
 </div><div class='line'> </div><div class='line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
 </div><div class='line'>    <span class="c1"># =&gt; &quot;Hi, your name&quot;</span>
-</div></pre></td></tr></table></div></figure>
+</div></pre></td></tr></table></div></figure>{% endraw %}
 EOF
   end
 
@@ -110,7 +110,7 @@ EOF
 
     context "with a language" do
       it "returns the right HTML for a given set of code" do
-        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: false })).to eql(expected_output_lang_ruby.chop)
+        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: true })).to eql(expected_output_lang_ruby.chop)
       end
     end
   end
