@@ -4,7 +4,7 @@ describe Octopress::Pygments do
   let(:wrapper) do
     Proc.new do |stuff, numbers|
       [
-        "<figure class='code'>",
+        "{% raw %}<figure class='code'>",
         "<div class='highlight'>",
         "<table><tr>",
         "<td class='line-numbers' aria-hidden='true'>",
@@ -13,20 +13,20 @@ describe Octopress::Pygments do
         "<td class='main  plain'>",
         "<pre>#{stuff}</pre>",
         "</td></tr>",
-        "</table></div></figure>"
+        "</table></div></figure>{% endraw %}"
       ].join
     end
   end
 
   let(:expected_output_no_options) do
     stuff = <<-EOF
-<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>    require "hi-there-honey"
+{% raw %}<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>    require "hi-there-honey"
 </div><div class='line'> </div><div class='line'>    def hi-there-honey
 </div><div class='line'>      HiThereHoney.new("your name")
 </div><div class='line'>    end
 </div><div class='line'> </div><div class='line'>    hi-there-honey
 </div><div class='line'>    # => "Hi, your name"
-</div></pre></td></tr></table></div></figure>
+</div></pre></td></tr></table></div></figure>{% endraw %}
 EOF
     stuff.strip
   end
@@ -89,11 +89,12 @@ EOF
       lang: "abc",
       url:  "http://something.com/hi/fuaiofnioaf.html",
       title: "Hello",
-      linenos: "yes",
+      linenos: true,
       marks: [5, 8, 9, 10, 15],
       link_text: "get it here",
       start: 5,
-      end: 15
+      end: 15,
+      escape: true
     }
   end
 
@@ -110,7 +111,7 @@ EOF
 
     context "with a language" do
       it "returns the right HTML for a given set of code" do
-        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'} })).to eql(expected_output_lang_ruby.chop)
+        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: false })).to eql(expected_output_lang_ruby.chop)
       end
     end
   end

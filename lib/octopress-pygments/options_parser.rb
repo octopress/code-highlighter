@@ -1,3 +1,6 @@
+class String
+end
+
 module Octopress
   module Pygments
     class OptionsParser
@@ -17,6 +20,7 @@ module Octopress
           .sub(/\s*start:\s*\d+/i,'')
           .sub(/\s*end:\s*\d+/i,'')
           .sub(/\s*range:\s*\d+-\d+/i,'')
+          .sub(/\s*escape:\s*\w+/i,'')
       end
 
       def parse_markup(defaults = {})
@@ -28,7 +32,8 @@ module Octopress
           marks:     marks,
           link_text: link_text,
           start:     start,
-          end:       endline
+          end:       endline,
+          escape:    escape
         }
         options = options.delete_if { |k,v| v.nil? }
         defaults.merge(options)
@@ -47,7 +52,11 @@ module Octopress
       end
 
       def linenos
-        extract(/\s*linenos:\s*(\w+)/i)
+        boolize(extract(/\s*linenos:\s*(\w+)/i, [1], true))
+      end
+
+      def escape
+        boolize(extract(/\s*escape:\s*(\w+)/i, [1], true))
       end
 
       # Public: Matches pattern for line marks and returns array of line
@@ -78,7 +87,7 @@ module Octopress
         if range
           range.first
         else
-          extract(/\s*start:\s*(\d+)/i).to_i
+          extract(/\s*start:\s*(\d+)/i, [1], 1).to_i
         end
       end
 
@@ -105,6 +114,12 @@ module Octopress
             return thing[index] if thing[index]
           end
         end
+      end
+
+      def boolize(str)
+        return true if str == true || str =~ (/(true|t|yes|y|1)$/i)
+        return false if str == false || str !~ /[^[:space:]]/ || str =~ (/(false|f|no|n|0)$/i)
+        return str
       end
     end
   end

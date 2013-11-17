@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.3.0
+  - Added `escape` option which wraps code in {% raw %} tags to escape liquid. Defaults to true.
+
 ## 1.2.3
   - Fixed: figcaptions now work when specifying a title.
 

@@ -24,6 +24,7 @@ module Octopress
           rendered_code = tableize_code(rendered_code, @lang, {linenos: @options[:linenos], start: @options[:start], marks: @options[:marks]})
           title = captionize(@options[:title], @options[:url], @options[:link_text]) if @options[:title]
           rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
+          rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if @options[:escape] != false
           Cache.write_to_cache(rendered_code, @options) unless @options[:no_cache]
           rendered_code
         end
