@@ -25,7 +25,7 @@ describe Octopress::Pygments do
 </div><div class='line'>      HiThereHoney.new("your name")
 </div><div class='line'>    end
 </div><div class='line'> </div><div class='line'>    hi-there-honey
-</div><div class='line'>    # => "Hi, your name"
+</div><div class='line'>    # =>  "Hi, your name"
 </div></pre></td></tr></table></div></figure>
 EOF
     stuff.strip
@@ -38,7 +38,7 @@ EOF
 </div><div class='line'>      <span class="no">HiThereHoney</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
 </div><div class='line'>    <span class="k">end</span>
 </div><div class='line'> </div><div class='line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div><div class='line'>    <span class="c1"># =&gt; &quot;Hi, your name&quot;</span>
+</div><div class='line'>    <span class="c1"># =&gt;  &quot;Hi, your name&quot;</span>
 </div></pre></td></tr></table></div></figure>{% endraw %}
 EOF
   end
@@ -52,7 +52,7 @@ EOF
     end
 
     hi-there-honey
-    # => "Hi, your name"
+    # =>  "Hi, your name"
     EOF
   end
 
