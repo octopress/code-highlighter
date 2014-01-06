@@ -58,8 +58,8 @@ module Octopress
       end
 
       def captionize (caption, url, link_text)
-        figcaption  = "<figcaption>#{caption}"
-        figcaption += "<a href='#{url}'>#{(link_text || 'link').strip}</a>" if url
+        figcaption  = "<figcaption class='code-caption'><span class='code-caption-title'>#{caption}</span>"
+        figcaption += "<a class='code-caption-link' href='#{url}'>#{(link_text || 'link').strip}</a>" if url
         figcaption += "</figcaption>"
       end
 
@@ -67,31 +67,31 @@ module Octopress
         start = options[:start]
         lines = options[:linenos]
         marks = options[:marks]
-        table = "<div class='highlight'><table><tr>"
+        table = "<table class='code-table'><tr>"
         table += number_lines(start, code.lines.count, marks) if lines
-        table += "<td class='main #{'unnumbered' unless lines} #{lang}'><pre>"
+        table += "<td class='code-main#{' unnumbered' unless lines} #{lang}'><pre>"
         code.lines.each_with_index do |line,index|
-          classes = 'line'
+          classes = 'code-line'
           if marks.include? index + start
-            classes += ' marked'
-            classes += ' start' unless marks.include? index - 1 + start
-            classes += ' end' unless marks.include? index + 1 + start
+            classes += ' marked-line'
+            classes += ' start-marked-line' unless marks.include? index - 1 + start
+            classes += ' end-marked-line' unless marks.include? index + 1 + start
           end
           line = line.strip.empty? ? ' ' : line
           table += "<div class='#{classes}'>#{line}</div>"
         end
-        table +="</pre></td></tr></table></div>"
+        table +="</pre></td></tr></table>"
       end
 
       def number_lines (start, count, marks)
         start
-        lines = "<td class='line-numbers' aria-hidden='true'><pre>"
+        lines = "<td class='code-line-numbers' aria-hidden='true'><pre>"
         count.times do |index|
-          classes = 'line-number'
+          classes = 'code-line-number'
           if marks.include? index + start
-            classes += ' marked'
-            classes += ' start' unless marks.include? index - 1 + start
-            classes += ' end' unless marks.include? index + 1 + start
+            classes += ' marked-line'
+            classes += ' start-marked-line' unless marks.include? index - 1 + start
+            classes += ' end-marked-line' unless marks.include? index + 1 + start
           end
           lines += "<div data-line='#{index + start}' class='#{classes}'></div>"
         end

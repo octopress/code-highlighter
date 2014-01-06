@@ -3,6 +3,7 @@ require 'fileutils'
 require 'digest/md5'
 require 'pygments'
 require 'colorator'
+require 'octopress-ink'
 
 PYGMENTS_CACHE_DIR = '.pygments-cache'
 FileUtils.mkdir_p(PYGMENTS_CACHE_DIR)
@@ -48,4 +49,19 @@ module Octopress
     end
   end
 end
+
+module Octopress
+  class CodeStyle < Plugin
+    def initialize(name, type)
+      @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
+      super
+    end
+
+    def add_assets
+      add_sass 'code-style.scss'
+    end
+  end
+end
+
+Octopress.register_plugin(Octopress::CodeStyle, 'code-style', 'plugin')
 

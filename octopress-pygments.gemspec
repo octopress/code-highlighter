@@ -15,6 +15,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'pygments.rb', '>= 0.5'
   gem.add_runtime_dependency 'colorator', '~> 0.1.0'
+  gem.add_runtime_dependency 'octopress-ink', '~> 1.0.0.alpha.13'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
