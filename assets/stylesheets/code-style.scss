@@ -1,4 +1,4 @@
-$link-color: lighten(#165b94, 3) !default;
+/*$link-color: lighten(#165b94, 3) !default;*/
 
 $noise-bg: '#aaa';//image-url('noise.png');
 $base03:          #002b36 !default; //darkest blue
@@ -17,6 +17,11 @@ $solar-violet:    #6c71c4 !default;
 $solar-blue:      #268bd2 !default;
 $solar-cyan:      #2aa198 !default;
 $solar-green:     #859900 !default;
+
+$marker:        rgba(#00baff, .5) !default;
+$marker-bg:     rgba($marker, .03) !default;
+$marker-border: rgba($marker, .13) !default;
+$marker-border-left:   $marker !default;
 
 $solarized: light;// !default;
 
@@ -49,37 +54,72 @@ $pre-color: $base1 !default;
 .pygments-code-figure {
   box-shadow: rgba(#000, .06) 0 0 10px;
   font-size: 13px;
+  * { box-sizing: border-box; }
 }
 
-.pygments-code-table {
+.pygments-code-pre {
+  background: darken($base03, 1);
   width: 100%;
-  border-collapse: collapse;
-  /*border: 1px solid $pre-border;*/
+  margin-bottom: 0;
+  display: table;
 }
-.pygments-code-line-number {
+
+$pre-line-padding: .8em;
+
+.pygments-code-row {
+  /*display: table-row;*/
+  width: 100%;
+  &:before, .pygments-code-line {
+    padding: 0 $pre-line-padding;
+  }
+  &:first-child {
+    &:before, .pygments-code-line { padding-top: $pre-line-padding; }
+  }
+  &:last-child {
+    &:before, .pygments-code-line { padding-bottom: $pre-line-padding; }
+  }
   &:before {
+    display: table-cell;
     content: attr(data-line);
+    min-width: 1.2em;
     color: $base01;
+    text-align: right;
+    line-height: 1.45em;
+    @if $solarized == light {
+      background: lighten($base03, 1);
+      border-right: 1px solid darken($base02, 2);
+      box-shadow: lighten($base03, 2) -1px 0 inset;
+      text-shadow: lighten($base02, 2) 0 -1px;
+    } @else {
+      background: $base02;
+      border-right: 1px solid darken($base03, 2);
+      box-shadow: lighten($base02, 2) -1px 0 inset;
+      text-shadow: darken($base02, 10) 0 -1px;
+    }
   }
 }
 
-.pygments-code-line-numbers {
-  text-align: right;
-  line-height: 1.45em;
-  border-radius: 0;
-  @if $solarized == light {
-    background: lighten($base03, 2);
-    border-right: 1px solid darken($base02, 2);
-    box-shadow: lighten($base03, 2) -1px 0 inset;
-    text-shadow: lighten($base02, 2) 0 -1px;
-  } @else {
-    background: $base02;
-    border-right: 1px solid darken($base03, 2);
-    box-shadow: lighten($base02, 2) -1px 0 inset;
-    text-shadow: darken($base02, 10) 0 -1px;
-  }
+.pygments-code-line {
+  display: table-cell;
+  width: 100%;
 }
 
+.marked-line {
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    background: $marker-bg;
+    left: 0; top: 0; bottom: 0; right: 0;
+    border: 1px solid { left-color: $marker-border-left; left-width: 2px; right-color: $marker-border; top: 0; bottom: 0; }
+  }
+  &.start-marked-line:after {
+    border-top: 1px solid $marker-border;
+  }
+  &.end-marked-line:after {
+    border-bottom: 1px solid $marker-border;
+  }
+}
 
 /*pre {*/
   /*background: $pre-bg $noise-bg;*/
@@ -90,13 +130,6 @@ $pre-color: $base1 !default;
   /*padding: .8em 1em;*/
   /*color: $pre-color;*/
   /*overflow: auto;*/
-/*}*/
-
-/*h3.filename {*/
-  /*@extend .code-title;*/
-  /*+ pre { */
-    /*@include border-top-radius(0px);*/
-  /*}*/
 /*}*/
 
 /*p, li {*/
@@ -112,7 +145,6 @@ $pre-color: $base1 !default;
   border: 1px solid #d8d8d8;
   overflow: scroll;
   overflow-y: hidden;
-  display: block;
   overflow-x: auto;
   line-height: 1.45em;
   background: $base03 $noise-bg;
@@ -196,8 +228,6 @@ $pre-color: $base1 !default;
   }
   margin-bottom: 0;
   background: $base03;
-  overflow-y: hidden;
-  overflow-x: auto;
 }
 
 $solar-scroll-bg: rgba(#fff, .15);
@@ -248,11 +278,6 @@ $solar-scroll-thumb: rgba(#fff, .2);
   z-index: 1;
   text-shadow: #cbcccc 0 1px 0;
   padding-left: 3em;
-}
-
-.pygments-code-main {
-  width: 100%;
-  margin-bottom: 0;
 }
 
 pre { 
