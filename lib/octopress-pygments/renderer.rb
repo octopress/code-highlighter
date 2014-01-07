@@ -67,7 +67,7 @@ module Octopress
         start = options[:start]
         lines = options[:linenos]
         marks = options[:marks]
-        table = "<div class='pygments-code'><table class='pygments-code-table'><tr>"
+        table = "<div class='pygments-code'><table class='pygments-code-table'><tbody><tr>"
         table += number_lines(start, code.lines.count, marks) if lines
         table += "<td class='pygments-code-main#{' unnumbered' unless lines} #{lang}'><pre>"
         code.lines.each_with_index do |line,index|
@@ -80,7 +80,7 @@ module Octopress
           line = line.strip.empty? ? ' ' : line
           table += "<div class='#{classes}'>#{line}</div>"
         end
-        table +="</pre></td></tr></table></div>"
+        table +="</pre></td></tr></tbody></table></div>"
       end
 
       def number_lines (start, count, marks)
