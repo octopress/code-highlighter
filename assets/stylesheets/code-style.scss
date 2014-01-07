@@ -1,6 +1,6 @@
 $link-color: lighten(#165b94, 3) !default;
 
-$noise-bg: '';//image-url('noise.png');
+$noise-bg: '#aaa';//image-url('noise.png');
 $base03:          #002b36 !default; //darkest blue
 $base02:          #073642 !default; //dark blue
 $base01:          #586e75 !default; //darkest gray
@@ -46,69 +46,70 @@ $pre-bg: $base03 !default;
 $pre-border: darken($base02, 5) !default;
 $pre-color: $base1 !default;
 
-
-.highlight {
-  td.code { width: 100%; }
-  .line-numbers {
-    text-align: right;
-    font-size: 13px;
-    line-height: 1.45em;
-    /*@include border-radius(0);*/
-    padding: .8em;
-  }
-  border: 1px solid $pre-border;
-}
-.gutter {
-  @if $solarized == light {
-    background: lighten($base03, 1) $noise-bg;
-    border-right: 1px solid darken($base02, 2);
-    /*@include box-shadow(lighten($base03, 2) -1px 0 inset);*/
-    text-shadow: lighten($base02, 2) 0 -1px;
-  } @else {
-    background: $base02 $noise-bg;
-    border-right: 1px solid darken($base03, 2);
-    /*@include box-shadow(lighten($base02, 2) -1px 0 inset);*/
-    text-shadow: darken($base02, 10) 0 -1px;
-  }
-  span { color: $base01; }
-}
-figure.code {
-  /*@include box-shadow(rgba(#000, .06) 0 0 10px);*/
+.pygments-code-figure {
+  box-shadow: rgba(#000, .06) 0 0 10px;
 }
 
-pre {
-  background: $pre-bg $noise-bg;
+.pygments-code-table {
+  width: 100%;
   border: 1px solid $pre-border;
-  line-height: 1.45em;
+}
+.pygments-code-line-numbers {
+  text-align: right;
   font-size: 13px;
-  margin-bottom: 2.1em;
-  padding: .8em 1em;
-  color: $pre-color;
-  overflow: auto;
+  line-height: 1.45em;
+  border-radius: 0;
+  padding: .8em;
 }
 
-h3.filename {
-  @extend .code-title;
-  + pre { 
+/*.gutter {*/
+  /*@if $solarized == light {*/
+    /*background: lighten($base03, 1) $noise-bg;*/
+    /*border-right: 1px solid darken($base02, 2);*/
+    /*box-shadow: lighten($base03, 2) -1px 0 inset;*/
+    /*text-shadow: lighten($base02, 2) 0 -1px;*/
+  /*} @else {*/
+    /*background: $base02 $noise-bg;*/
+    /*border-right: 1px solid darken($base03, 2);*/
+    /*box-shadow: lighten($base02, 2) -1px 0 inset;*/
+    /*text-shadow: darken($base02, 10) 0 -1px;*/
+  /*}*/
+  /*span { color: $base01; }*/
+/*}*/
+
+
+/*pre {*/
+  /*background: $pre-bg $noise-bg;*/
+  /*border: 1px solid $pre-border;*/
+  /*line-height: 1.45em;*/
+  /*font-size: 13px;*/
+  /*margin-bottom: 2.1em;*/
+  /*padding: .8em 1em;*/
+  /*color: $pre-color;*/
+  /*overflow: auto;*/
+/*}*/
+
+/*h3.filename {*/
+  /*@extend .code-title;*/
+  /*+ pre { */
     /*@include border-top-radius(0px);*/
-  }
-}
+  /*}*/
+/*}*/
 
-p, li {
-  code {
+/*p, li {*/
+  /*code {*/
     /*@include mono-font;*/
-    display: inline-block;
-  }
-  pre code { font-size: 1em; background: none; border: none; }
-}
+    /*display: inline-block;*/
+  /*}*/
+  /*pre code { font-size: 1em; background: none; border: none; }*/
+/*}*/
 
-.pre-code {
+.pygments-code-main {
   /*@include selection(adjust-color($base03, $lightness: 23%, $saturation: -65%), $text-shadow: $base03 0 1px);*/
   /*@include mono-font;*/
   overflow: scroll;
   overflow-y: hidden;
   display: block;
-  padding: .8em;
   overflow-x: auto;
   line-height: 1.45em;
   background: $base03 $noise-bg;
@@ -182,10 +183,10 @@ p, li {
   div { .gd, .gd .x, .gi, .gi .x { display: inline-block; width: 100%; }}
 }
 
-.highlight {
+.pygments-code-table {
   pre { 
     background: none;
-    /*@include border-radius(none);*/
+    border-radius: none;
     border: none;
     padding: 0;
     margin-bottom: 0;
@@ -204,30 +205,22 @@ $solar-scroll-thumb: rgba(#fff, .2);
   $solar-scroll-thumb: rgba(#000, .15);
 }
 
-.highlight pre {
+.pygments-code-table pre {
   &::-webkit-scrollbar {  height: .5em; background: $solar-scroll-bg; }
   &::-webkit-scrollbar-thumb:horizontal { background: $solar-scroll-thumb;  -webkit-border-radius: 4px; border-radius: 4px }
 }
 
-.highlight code { @extend .pre-code;}
 
-figure.code {
+.pygments-code-figure {
   background: none;
   padding: 0;
   border: 0;
   margin-bottom: 1.5em;
   pre { margin-bottom: 0; }
-  figcaption {
-    position: relative;
-    @extend .code-title;
-    a { @extend .download-source; }
-  }
-  .highlight {
-    margin-bottom: 0;
-  }
 }
 
-.code-title {
+.pygments-code-caption {
+  position: relative;
   text-align: center;
   font-size: 13px;
   line-height: 2em;
@@ -237,7 +230,7 @@ figure.code {
   margin-bottom: 0;
   /*@include border-top-radius(5px);*/
   font-family: "Helvetica Neue", Arial, "Lucida Grande", "Lucida Sans Unicode", Lucida, sans-serif;
-  background: #aaaaaa image-url("code_bg.png") top repeat-x;
+  background: #aaaaaa;
   border: 1px solid #565656;
   border-top-color: #cbcbcb;
   border-left-color: #a5a5a5;
@@ -245,7 +238,7 @@ figure.code {
   border-bottom: 0;
 }
 
-.download-source {
+.pygments-code-caption-link { 
   position: absolute; right: .8em;
   /*@include hover-link;*/
   color: #666;
@@ -253,6 +246,10 @@ figure.code {
   font-size: 13px;
   text-shadow: #cbcccc 0 1px 0;
   padding-left: 3em;
+}
+
+.pygments-code-main {
+  margin-bottom: 0;
 }
 
 pre { margin-top: 0; }

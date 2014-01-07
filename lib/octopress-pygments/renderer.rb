@@ -24,7 +24,7 @@ module Octopress
           end
           rendered_code = tableize_code(rendered_code, @lang, {linenos: @options[:linenos], start: @options[:start], marks: @options[:marks]})
           title = captionize(@options[:title], @options[:url], @options[:link_text]) if @options[:title]
-          rendered_code = "<figure class='code'>#{title}#{rendered_code}</figure>"
+          rendered_code = "<figure class='pygments-code-figure'>#{title}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if @options[:escape]
           Cache.write_to_cache(rendered_code, @options) unless @options[:no_cache]
           rendered_code
@@ -58,8 +58,8 @@ module Octopress
       end
 
       def captionize (caption, url, link_text)
-        figcaption  = "<figcaption class='code-caption'><span class='code-caption-title'>#{caption}</span>"
-        figcaption += "<a class='code-caption-link' href='#{url}'>#{(link_text || 'link').strip}</a>" if url
+        figcaption  = "<figcaption class='pygments-code-caption'><span class='pygments-code-caption-title'>#{caption}</span>"
+        figcaption += "<a class='pygments-code-caption-link' href='#{url}'>#{(link_text || 'link').strip}</a>" if url
         figcaption += "</figcaption>"
       end
 
@@ -67,11 +67,11 @@ module Octopress
         start = options[:start]
         lines = options[:linenos]
         marks = options[:marks]
-        table = "<table class='code-table'><tr>"
+        table = "<div class='pygments-code'><table class='pygments-code-table'><tr>"
         table += number_lines(start, code.lines.count, marks) if lines
-        table += "<td class='code-main#{' unnumbered' unless lines} #{lang}'><pre>"
+        table += "<td class='pygments-code-main#{' unnumbered' unless lines} #{lang}'><pre>"
         code.lines.each_with_index do |line,index|
-          classes = 'code-line'
+          classes = 'pygments-code-line'
           if marks.include? index + start
             classes += ' marked-line'
             classes += ' start-marked-line' unless marks.include? index - 1 + start
@@ -80,14 +80,14 @@ module Octopress
           line = line.strip.empty? ? ' ' : line
           table += "<div class='#{classes}'>#{line}</div>"
         end
-        table +="</pre></td></tr></table>"
+        table +="</pre></td></tr></table></div>"
       end
 
       def number_lines (start, count, marks)
         start
-        lines = "<td class='code-line-numbers' aria-hidden='true'><pre>"
+        lines = "<td class='pygments-code-line-numbers' aria-hidden='true'><pre>"
         count.times do |index|
-          classes = 'code-line-number'
+          classes = 'pygments-code-line-number'
           if marks.include? index + start
             classes += ' marked-line'
             classes += ' start-marked-line' unless marks.include? index - 1 + start
