@@ -4,42 +4,36 @@ describe Octopress::Pygments do
   let(:wrapper) do
     Proc.new do |stuff, numbers|
       [
-        "<figure class='code'>",
-        "<div class='highlight'>",
-        "<table><tr>",
-        "<td class='line-numbers' aria-hidden='true'>",
-        "<pre>#{numbers}</pre>",
-        "</td>",
-        "<td class='main  plain'>",
-        "<pre>#{stuff}</pre>",
-        "</td></tr>",
-        "</table></div></figure>"
+        "<figure class='pygments-code-figure'>",
+        "<div class='pygments-code'>",
+        "<pre class='pygments-code-pre plain'>#{stuff}</pre>",
+        "</div></figure>"
       ].join
     end
   end
 
   let(:expected_output_no_options) do
     stuff = <<-EOF
-<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  plain'><pre><div class='line'>    require "hi-there-honey"
-</div><div class='line'> </div><div class='line'>    def hi-there-honey
-</div><div class='line'>      HiThereHoney.new("your name")
-</div><div class='line'>    end
-</div><div class='line'> </div><div class='line'>    hi-there-honey
-</div><div class='line'>    # =>  "Hi, your name"
-</div></pre></td></tr></table></div></figure>
+<figure class='pygments-code-figure'><div class='pygments-code'><pre class='pygments-code-pre plain'><div data-line='1' class='pygments-code-row numbered'><div class='pygments-code-line'>    require "hi-there-honey"
+</div></div><div data-line='2' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='3' class='pygments-code-row numbered'><div class='pygments-code-line'>    def hi-there-honey
+</div></div><div data-line='4' class='pygments-code-row numbered'><div class='pygments-code-line'>      HiThereHoney.new("your name")
+</div></div><div data-line='5' class='pygments-code-row numbered'><div class='pygments-code-line'>    end
+</div></div><div data-line='6' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='7' class='pygments-code-row numbered'><div class='pygments-code-line'>    hi-there-honey
+</div></div><div data-line='8' class='pygments-code-row numbered'><div class='pygments-code-line'>    # =>  "Hi, your name"
+</div></div></pre></div></figure>
 EOF
     stuff.strip
   end
 
   let(:expected_output_lang_ruby) do
     stuff = <<-EOF
-{% raw %}<figure class='code'><div class='highlight'><table><tr><td class='line-numbers' aria-hidden='true'><pre><div data-line='1' class='line-number'></div><div data-line='2' class='line-number'></div><div data-line='3' class='line-number'></div><div data-line='4' class='line-number'></div><div data-line='5' class='line-number'></div><div data-line='6' class='line-number'></div><div data-line='7' class='line-number'></div><div data-line='8' class='line-number'></div></pre></td><td class='main  ruby'><pre><div class='line'>    <span class="nb">require</span> <span class="s2">&quot;hi-there-honey&quot;</span>
-</div><div class='line'> </div><div class='line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div><div class='line'>      <span class="no">HiThereHoney</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
-</div><div class='line'>    <span class="k">end</span>
-</div><div class='line'> </div><div class='line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div><div class='line'>    <span class="c1"># =&gt;  &quot;Hi, your name&quot;</span>
-</div></pre></td></tr></table></div></figure>{% endraw %}
+{% raw %}<figure class='pygments-code-figure'><div class='pygments-code'><pre class='pygments-code-pre ruby'><div data-line='1' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="nb">require</span> <span class="s2">&quot;hi-there-honey&quot;</span>
+</div></div><div data-line='2' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='3' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='4' class='pygments-code-row numbered'><div class='pygments-code-line'>      <span class="no">HiThereHoney</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
+</div></div><div data-line='5' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="k">end</span>
+</div></div><div data-line='6' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='7' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='8' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="c1"># =&gt;  &quot;Hi, your name&quot;</span>
+</div></div></pre></div></figure>{% endraw %}
 EOF
   end
 

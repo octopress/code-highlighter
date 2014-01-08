@@ -68,10 +68,10 @@ module Octopress
         lines = options[:linenos]
         marks = options[:marks]
         table = "<div class='pygments-code'>"
-        #table += number_lines(start, code.lines.count, marks) if lines
-        table += "<pre class='pygments-code-pre #{lines ? 'numbered' : 'unnumbered'} #{lang}'>"
+        table += "<pre class='pygments-code-pre #{lang}'>"
         code.lines.each_with_index do |line,index|
           classes = 'pygments-code-row'
+          classes += lines ? ' numbered' : ' unnumbered'
           if marks.include? index + start
             classes += ' marked-line'
             classes += ' start-marked-line' unless marks.include? index - 1 + start
@@ -80,22 +80,7 @@ module Octopress
           line = line.strip.empty? ? ' ' : line
           table += "<div data-line='#{index + start}' class='#{classes}'><div class='pygments-code-line'>#{line}</div></div>"
         end
-        table +="</pre>"
-      end
-
-      def number_lines (start, count, marks)
-        start
-        lines = "<td class='pygments-code-line-numbers' aria-hidden='true'><pre>"
-        count.times do |index|
-          classes = 'pygments-code-line-number'
-          if marks.include? index + start
-            classes += ' marked-line'
-            classes += ' start-marked-line' unless marks.include? index - 1 + start
-            classes += ' end-marked-line' unless marks.include? index + 1 + start
-          end
-          lines += "<div data-line='#{index + start}' class='#{classes}'></div>"
-        end
-        lines += "</pre></td>"
+        table +="</pre></div>"
       end
 
       # Public:

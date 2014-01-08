@@ -1,4 +1,3 @@
-/*$noise-bg: '#aaa';//image-url('noise.png');*/
 @import 'solarized';
 @import 'pygments-style';
 
@@ -19,8 +18,11 @@ $pre-line-padding: .8em;
 .pygments-code-row {
   display: table-row;
   width: 100%;
+}
+
+.pygments-code-row {
   &:before, .pygments-code-line {
-    padding: 0 $pre-line-padding;
+    padding: {left: $pre-line-padding + .8; right: $pre-line-padding + .8 }
   }
   &:first-child {
     &:before, .pygments-code-line { padding-top: $pre-line-padding; }
@@ -28,22 +30,27 @@ $pre-line-padding: .8em;
   &:last-child {
     &:before, .pygments-code-line { padding-bottom: $pre-line-padding; }
   }
-  &:before {
-    display: table-cell;
-    content: attr(data-line);
-    min-width: 1.2em;
-    color: $base01;
-    text-align: right;
-    line-height: 1.45em;
-    @if $solarized == light {
-      background: lighten($base03, 1);
-      border-right: 1px solid darken($base02, 2);
-      text-shadow: lighten($base02, 2) 0 -1px;
-    } @else {
-      background: $base02;
-      border-right: 1px solid darken($base03, 2);
-      box-shadow: lighten($base02, 2) -1px 0 inset;
-      text-shadow: darken($base02, 10) 0 -1px;
+  &.numbered {
+    &:before, .pygments-code-line {
+      padding: {left: $pre-line-padding; right: $pre-line-padding }
+    }
+    &:before {
+      display: table-cell;
+      content: attr(data-line);
+      min-width: 1.2em;
+      color: $base01;
+      text-align: right;
+      line-height: 1.45em;
+      @if $solarized == light {
+        background: lighten($base03, 1);
+        border-right: 1px solid darken($base02, 2);
+        text-shadow: lighten($base02, 2) 0 -1px;
+      } @else {
+        background: $base02;
+        border-right: 1px solid darken($base03, 2);
+        box-shadow: lighten($base02, 2) -1px 0 inset;
+        text-shadow: darken($base02, 10) 0 -1px;
+      }
     }
   }
 }
@@ -57,6 +64,8 @@ $pre-line-padding: .8em;
 
 .marked-line {
   position: relative;
+  &.unnumbered {
+  }
   .pygments-code-line {
     &:before {
       content: "";
@@ -66,12 +75,16 @@ $pre-line-padding: .8em;
       border-right: 1px solid $marker-border;
     }
   }
-  &:before {
+  &.unnumbered .pygments-code-line:before {
+    border-left: 3px solid $marker-border-left;
+  }
+  &.numbered:before {
     background: $marker-bg;
     border-left: 3px solid $marker-border-left;
     border-right-color: darken($marker-bg, 20);
   }
 }
+
 .start-marked-line {
   &:before, .pygments-code-line:before {
     border-top: 1px solid $marker-border;
@@ -84,7 +97,6 @@ $pre-line-padding: .8em;
 }
 
 .pygments-code {
-  /*@include selection(adjust-color($base03, $lightness: 23%, $saturation: -65%), $text-shadow: $base03 0 1px);*/
   overflow: scroll;
   overflow-y: hidden;
   overflow-x: auto;
@@ -92,6 +104,8 @@ $pre-line-padding: .8em;
 }
 
 .pygments-code-table {
+  margin-bottom: 0;
+  background: $base03;
   pre { 
     padding: .8em;
     background: none;
@@ -99,8 +113,6 @@ $pre-line-padding: .8em;
     border: none;
     margin-bottom: 0;
   }
-  margin-bottom: 0;
-  background: $base03;
 }
 
 .pygments-code-figure {
@@ -130,7 +142,6 @@ $pre-line-padding: .8em;
 
 .pygments-code-caption-link { 
   position: absolute; right: .8em;
-  /*@include hover-link;*/
   color: #666;
   z-index: 1;
   text-shadow: #cbcccc 0 1px 0;
