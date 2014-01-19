@@ -1,0 +1,7 @@
+name: Your New Jekyll Site
+markdown: redcarpet
+pygments: true
+sass: 
+  output_style: compressed
+  line_numbers: true
+

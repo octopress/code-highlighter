@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+  - Updated Octopress Ink version, added a simple demo project.
+
+## 2.0.0
+  - Added support for Octopress Ink
+
 ## 1.3.1
   - Fixed: line numbers now start at 1 instead of zero.
   - Changed: `escape` option defaults to false.
