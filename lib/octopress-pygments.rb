@@ -50,18 +50,18 @@ module Octopress
   end
 end
 
-module Octopress
-  class CodeStyle < Plugin
-    def initialize(name, type)
-      @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
-      super
-    end
+class OctopressPygments < Octopress::Ink::Plugin
+  def initialize(name, type)
+    @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
+    @version = Octopress::Pygments::VERSION
+    @description = "For beautiful code snippets."
+    super
+  end
 
-    def add_assets
-      add_sass 'code-style.scss'
-    end
+  def add_assets
+    add_sass 'code.scss'
   end
 end
 
-Octopress.register_plugin(Octopress::CodeStyle, 'code-style', 'plugin')
+Octopress::Ink.register_plugin(OctopressPygments, 'octopress-pygments', 'plugin')
 
