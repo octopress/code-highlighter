@@ -1,8 +1,5 @@
-class String
-end
-
 module Octopress
-  module Pygments
+  module CodeStyle
     class OptionsParser
       attr_accessor :input
 

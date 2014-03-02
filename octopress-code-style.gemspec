@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'octopress-pygments/version'
+require 'octopress-code-style/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "octopress-pygments"
-  gem.version       = Octopress::Pygments::VERSION
+  gem.name          = "octopress-code-style"
+  gem.version       = Octopress::CodeStyle::VERSION
   gem.authors       = ["Brandon Mathis"]
   gem.email         = ["brandon@imathis.com"]
   gem.description   = %q{Octopress's core plugin for rendering nice code blocks}
@@ -13,10 +13,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/octopress/octopress-pygments"
   gem.license       = "MIT"
 
-  gem.add_runtime_dependency 'pygments.rb', '>= 0.5'
+  #gem.add_runtime_dependency 'pygments.rb', '>= 0.5'
+  gem.add_runtime_dependency 'rouge', '~> 1.3.2'
   gem.add_runtime_dependency 'colorator', '~> 0.1.0'
   gem.add_runtime_dependency 'octopress-ink', '>= 1.0.0.alpha.33'
 
+  gem.add_development_dependency 'pry-debugger'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
 

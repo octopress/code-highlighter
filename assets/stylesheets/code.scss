@@ -1,12 +1,12 @@
 @import 'solarized';
-@import 'pygments-style';
+@import 'code-style';
 
-.pygments-code-figure {
+.octopress-code-figure {
   font-size: 13px;
   * { box-sizing: border-box; }
 }
 
-.pygments-code-pre {
+.octopress-code-pre {
   background: darken($base03, 1);
   width: 100%;
   margin-bottom: 0;
@@ -15,23 +15,23 @@
 
 $pre-line-padding: .8em;
 
-.pygments-code-row {
+.octopress-code-row {
   display: table-row;
   width: 100%;
 }
 
-.pygments-code-row {
-  &:before, .pygments-code-line {
+.octopress-code-row {
+  &:before, .octopress-code-line {
     padding: {left: $pre-line-padding + .8; right: $pre-line-padding + .8 }
   }
   &:first-child {
-    &:before, .pygments-code-line { padding-top: $pre-line-padding; }
+    &:before, .octopress-code-line { padding-top: $pre-line-padding; }
   }
   &:last-child {
-    &:before, .pygments-code-line { padding-bottom: $pre-line-padding; }
+    &:before, .octopress-code-line { padding-bottom: $pre-line-padding; }
   }
   &.numbered {
-    &:before, .pygments-code-line {
+    &:before, .octopress-code-line {
       padding: {left: $pre-line-padding; right: $pre-line-padding }
     }
     &:before {
@@ -55,7 +55,7 @@ $pre-line-padding: .8em;
   }
 }
 
-.pygments-code-line {
+.octopress-code-line {
   display: table-cell;
   width: 100%;
   position: relative;
@@ -66,7 +66,7 @@ $pre-line-padding: .8em;
   position: relative;
   &.unnumbered {
   }
-  .pygments-code-line {
+  .octopress-code-line {
     &:before {
       content: "";
       position: absolute;
@@ -75,7 +75,7 @@ $pre-line-padding: .8em;
       border-right: 1px solid $marker-border;
     }
   }
-  &.unnumbered .pygments-code-line:before {
+  &.unnumbered .octopress-code-line:before {
     border-left: 3px solid $marker-border-left;
   }
   &.numbered:before {
@@ -86,24 +86,24 @@ $pre-line-padding: .8em;
 }
 
 .start-marked-line {
-  &:before, .pygments-code-line:before {
+  &:before, .octopress-code-line:before {
     border-top: 1px solid $marker-border;
   }
 }
 .end-marked-line {
-  &:before, .pygments-code-line:before {
+  &:before, .octopress-code-line:before {
     border-bottom: 1px solid $marker-border;
   }
 }
 
-.pygments-code {
+.octopress-code {
   overflow: scroll;
   overflow-y: hidden;
   overflow-x: auto;
   line-height: 1.45em;
 }
 
-.pygments-code-table {
+.octopress-code-table {
   margin-bottom: 0;
   background: $base03;
   pre { 
@@ -115,7 +115,7 @@ $pre-line-padding: .8em;
   }
 }
 
-.pygments-code-figure {
+.octopress-code-figure {
   margin: {left: 0; right: 0;}
   background: none;
   padding: 0;
@@ -123,7 +123,7 @@ $pre-line-padding: .8em;
   pre { margin-bottom: 0; }
 }
 
-.pygments-code-caption {
+.octopress-code-caption {
   position: relative;
   text-align: center;
   line-height: 2em;
@@ -137,10 +137,10 @@ $pre-line-padding: .8em;
   border-top-right-radius: 5px;
   font-family: "Helvetica Neue", Arial, "Lucida Grande", "Lucida Sans Unicode", Lucida, sans-serif;
   border: 1px solid #cbcbcb;
-  + .pygments-code { border-top: 0; }
+  + .octopress-code { border-top: 0; }
 }
 
-.pygments-code-caption-link { 
+.octopress-code-caption-link { 
   position: absolute; right: .8em;
   color: #666;
   z-index: 1;

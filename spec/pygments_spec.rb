@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Octopress::Pygments do
+describe Octopress::CodeStyle do
   let(:wrapper) do
     Proc.new do |stuff, numbers|
       [
-        "<figure class='pygments-code-figure'>",
-        "<div class='pygments-code'>",
-        "<pre class='pygments-code-pre plain'>#{stuff}</pre>",
+        "<figure class='octopress-code-figure'>",
+        "<div class='octopress-code'>",
+        "<pre class='octopress-code-pre'>#{stuff}</pre>",
         "</div></figure>"
       ].join
     end
@@ -14,12 +14,12 @@ describe Octopress::Pygments do
 
   let(:expected_output_no_options) do
     stuff = <<-EOF
-<figure class='pygments-code-figure'><div class='pygments-code'><pre class='pygments-code-pre plain'><div data-line='1' class='pygments-code-row numbered'><div class='pygments-code-line'>    require "hi-there-honey"
-</div></div><div data-line='2' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='3' class='pygments-code-row numbered'><div class='pygments-code-line'>    def hi-there-honey
-</div></div><div data-line='4' class='pygments-code-row numbered'><div class='pygments-code-line'>      HiThereHoney.new("your name")
-</div></div><div data-line='5' class='pygments-code-row numbered'><div class='pygments-code-line'>    end
-</div></div><div data-line='6' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='7' class='pygments-code-row numbered'><div class='pygments-code-line'>    hi-there-honey
-</div></div><div data-line='8' class='pygments-code-row numbered'><div class='pygments-code-line'>    # =>  "Hi, your name"
+<figure class='octopress-code-figure'><div class='octopress-code'><pre class='octopress-code-pre'><div data-line='1' class='octopress-code-row numbered'><div class='octopress-code-line'>    require "hi-there-honey"
+</div></div><div data-line='2' class='octopress-code-row numbered'><div class='octopress-code-line'> </div></div><div data-line='3' class='octopress-code-row numbered'><div class='octopress-code-line'>    def hi-there-honey
+</div></div><div data-line='4' class='octopress-code-row numbered'><div class='octopress-code-line'>      HiThereHoney.new("your name")
+</div></div><div data-line='5' class='octopress-code-row numbered'><div class='octopress-code-line'>    end
+</div></div><div data-line='6' class='octopress-code-row numbered'><div class='octopress-code-line'> </div></div><div data-line='7' class='octopress-code-row numbered'><div class='octopress-code-line'>    hi-there-honey
+</div></div><div data-line='8' class='octopress-code-row numbered'><div class='octopress-code-line'>    # =>  "Hi, your name"
 </div></div></pre></div></figure>
 EOF
     stuff.strip
@@ -27,13 +27,12 @@ EOF
 
   let(:expected_output_lang_ruby) do
     stuff = <<-EOF
-{% raw %}<figure class='pygments-code-figure'><div class='pygments-code'><pre class='pygments-code-pre ruby'><div data-line='1' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="nb">require</span> <span class="s2">&quot;hi-there-honey&quot;</span>
-</div></div><div data-line='2' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='3' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div></div><div data-line='4' class='pygments-code-row numbered'><div class='pygments-code-line'>      <span class="no">HiThereHoney</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;your name&quot;</span><span class="p">)</span>
-</div></div><div data-line='5' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="k">end</span>
-</div></div><div data-line='6' class='pygments-code-row numbered'><div class='pygments-code-line'> </div></div><div data-line='7' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div></div><div data-line='8' class='pygments-code-row numbered'><div class='pygments-code-line'>    <span class="c1"># =&gt;  &quot;Hi, your name&quot;</span>
-</div></div></pre></div></figure>{% endraw %}
+{% raw %}<figure class='octopress-code-figure'><div class='octopress-code'><pre class='octopress-code-pre'><div data-line='1' class='octopress-code-row numbered'><div class='octopress-code-line'><span class="nb">require</span> <span class="s2">"hi-there-honey"</span>
+</div></div><div data-line='2' class='octopress-code-row numbered'><div class='octopress-code-line'> </div></div><div data-line='3' class='octopress-code-row numbered'><div class='octopress-code-line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='4' class='octopress-code-row numbered'><div class='octopress-code-line'>      <span class="no">HiThereHoney</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"your name"</span><span class="p">)</span>
+</div></div><div data-line='5' class='octopress-code-row numbered'><div class='octopress-code-line'>    <span class="k">end</span>
+</div></div><div data-line='6' class='octopress-code-row numbered'><div class='octopress-code-line'> </div></div><div data-line='7' class='octopress-code-row numbered'><div class='octopress-code-line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='8' class='octopress-code-row numbered'><div class='octopress-code-line'>    <span class="c1"># =&gt;  "Hi, your name"</span></div></div></pre></div></figure>{% endraw %}
 EOF
   end
 

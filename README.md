@@ -1,6 +1,6 @@
-# Octopress Pygments
+# Octopress CodeStyle
 
-[![Build Status](https://travis-ci.org/octopress/octopress-pygments.png)](https://travis-ci.org/octopress/octopress-pygments)
+[![Build Status](https://travis-ci.org/octopress/octopress-code-style.png)](https://travis-ci.org/octopress/octopress-code-style)
 
 TODO: Write a gem description
 
@@ -8,7 +8,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'octopress-pygments'
+    gem 'octopress-code-style'
 
 And then execute:
 
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install octopress-pygments
+    $ gem install octopress-code-style
 
 ## Usage
 

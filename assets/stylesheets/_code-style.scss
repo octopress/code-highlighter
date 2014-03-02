@@ -1,19 +1,19 @@
-%pygments-diff-bg {
+%octopress-diff-bg {
   content: "";
   position: absolute;
   z-index: -1;
   left: 0; right: 0; top: 0; bottom: 0;
 }
 
-@mixin pygments-diff-bg($bg) {
+@mixin octopress-diff-bg($bg) {
   &:after {
     background: $bg;
-    @extend %pygments-diff-bg;
+    @extend %octopress-diff-bg;
   }
 }
 
-.pygments-code {
-  border: 1px solid $pygments-code-border;
+.octopress-code {
+  border: 1px solid $octopress-code-border;
   background: $pre-bg;
   color: $base1;
   span { color: $base1; }
@@ -34,11 +34,11 @@
   .ow     { color: $solar-cyan; font-weight: bold; }                   /* Operator.Word */
   .gd     { 
             color: $base1;                                             /* Generic.Deleted */
-            @include pygments-diff-bg(mix($solar-red, $base03, 25%));
+            @include octopress-diff-bg(mix($solar-red, $base03, 25%));
           }
   .gd .x  {                                                            /* Generic.Deleted.Specific */
             color: $base1;
-            @include pygments-diff-bg(mix($solar-red, $base03, 35%)); 
+            @include octopress-diff-bg(mix($solar-red, $base03, 35%)); 
           }
   .ge     {                                                            /* Generic.Emph */
             color: $base1;
@@ -47,11 +47,11 @@
   .gh     { color: $base01; }                                          /* Generic.Heading */
   .gi     {                                                            /* Generic.Inserted */
             color: $base1;
-            @include pygments-diff-bg(mix($solar-green, $base03, 20%)); 
+            @include octopress-diff-bg(mix($solar-green, $base03, 20%)); 
           }
   .gi .x  {                                                            /* Generic.Inserted.Specific */
             color: $base1;
-            @include pygments-diff-bg(mix($solar-green, $base03, 40%)); 
+            @include octopress-diff-bg(mix($solar-green, $base03, 40%)); 
           }
   //.go     { color: #888888 }                                         /* Generic.Output */
   //.gp     { color: #555555 }                                         /* Generic.Prompt */
