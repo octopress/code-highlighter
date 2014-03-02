@@ -1,5 +1,5 @@
 module Octopress
-  module Code
+  module CodeHighlighter
     class Cache
       CODE_CACHE_DIR = '.code-style-cache'
 
@@ -27,3 +27,4 @@ module Octopress
     end
   end
 end
+

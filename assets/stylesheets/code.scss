@@ -1,12 +1,12 @@
 @import 'solarized';
 @import 'code-style';
 
-.octopress-code-figure {
+.code-highlight-figure {
   font-size: 13px;
   * { box-sizing: border-box; }
 }
 
-.octopress-code-pre {
+.code-highlight-pre {
   background: darken($base03, 1);
   width: 100%;
   margin-bottom: 0;
@@ -15,23 +15,23 @@
 
 $pre-line-padding: .8em;
 
-.octopress-code-row {
+.code-highlight-row {
   display: table-row;
   width: 100%;
 }
 
-.octopress-code-row {
-  &:before, .octopress-code-line {
+.code-highlight-row {
+  &:before, .code-highlight-line {
     padding: {left: $pre-line-padding + .8; right: $pre-line-padding + .8 }
   }
   &:first-child {
-    &:before, .octopress-code-line { padding-top: $pre-line-padding; }
+    &:before, .code-highlight-line { padding-top: $pre-line-padding; }
   }
   &:last-child {
-    &:before, .octopress-code-line { padding-bottom: $pre-line-padding; }
+    &:before, .code-highlight-line { padding-bottom: $pre-line-padding; }
   }
   &.numbered {
-    &:before, .octopress-code-line {
+    &:before, .code-highlight-line {
       padding: {left: $pre-line-padding; right: $pre-line-padding }
     }
     &:before {
@@ -55,7 +55,7 @@ $pre-line-padding: .8em;
   }
 }
 
-.octopress-code-line {
+.code-highlight-line {
   display: table-cell;
   width: 100%;
   position: relative;
@@ -66,7 +66,7 @@ $pre-line-padding: .8em;
   position: relative;
   &.unnumbered {
   }
-  .octopress-code-line {
+  .code-highlight-line {
     &:before {
       content: "";
       position: absolute;
@@ -75,7 +75,7 @@ $pre-line-padding: .8em;
       border-right: 1px solid $marker-border;
     }
   }
-  &.unnumbered .octopress-code-line:before {
+  &.unnumbered .code-highlight-line:before {
     border-left: 3px solid $marker-border-left;
   }
   &.numbered:before {
@@ -86,24 +86,24 @@ $pre-line-padding: .8em;
 }
 
 .start-marked-line {
-  &:before, .octopress-code-line:before {
+  &:before, .code-highlight-line:before {
     border-top: 1px solid $marker-border;
   }
 }
 .end-marked-line {
-  &:before, .octopress-code-line:before {
+  &:before, .code-highlight-line:before {
     border-bottom: 1px solid $marker-border;
   }
 }
 
-.octopress-code {
+.code-highlight {
   overflow: scroll;
   overflow-y: hidden;
   overflow-x: auto;
   line-height: 1.45em;
 }
 
-.octopress-code-table {
+.code-highlight-table {
   margin-bottom: 0;
   background: $base03;
   pre { 
@@ -115,7 +115,7 @@ $pre-line-padding: .8em;
   }
 }
 
-.octopress-code-figure {
+.code-highlight-figure {
   margin: {left: 0; right: 0;}
   background: none;
   padding: 0;
@@ -123,7 +123,7 @@ $pre-line-padding: .8em;
   pre { margin-bottom: 0; }
 }
 
-.octopress-code-caption {
+.code-highlight-caption {
   position: relative;
   text-align: center;
   line-height: 2em;
@@ -137,10 +137,10 @@ $pre-line-padding: .8em;
   border-top-right-radius: 5px;
   font-family: "Helvetica Neue", Arial, "Lucida Grande", "Lucida Sans Unicode", Lucida, sans-serif;
   border: 1px solid #cbcbcb;
-  + .octopress-code { border-top: 0; }
+  + .code-highlight { border-top: 0; }
 }
 
-.octopress-code-caption-link { 
+.code-highlight-caption-link { 
   position: absolute; right: .8em;
   color: #666;
   z-index: 1;

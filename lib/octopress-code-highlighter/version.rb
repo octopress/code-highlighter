@@ -1,5 +1,6 @@
 module Octopress
-  module Code
+  module CodeHighlighter
     VERSION = "3.0.0"
   end
 end
+

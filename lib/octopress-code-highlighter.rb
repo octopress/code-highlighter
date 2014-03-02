@@ -1,4 +1,4 @@
-require 'octopress-code/version'
+require 'octopress-code-highlighter/version'
 require 'fileutils'
 require 'digest/md5'
 
@@ -9,7 +9,7 @@ CODE_CACHE_DIR = '.code-cache'
 FileUtils.mkdir_p(CODE_CACHE_DIR)
 
 module Octopress
-  module Code
+  module CodeHighlighter
     DEFAULTS = {
       lang: 'plain',
       linenos: true,
@@ -17,9 +17,9 @@ module Octopress
       start: 1
     }
 
-    autoload :Cache,         'octopress-code/cache'
-    autoload :OptionsParser, 'octopress-code/options_parser'
-    autoload :Renderer,      'octopress-code/renderer'
+    autoload :Cache,         'octopress-code-highlighter/cache'
+    autoload :OptionsParser, 'octopress-code-highlighter/options_parser'
+    autoload :Renderer,      'octopress-code-highlighter/renderer'
 
     def self.highlight(code, options={})
       Renderer.new(code, options).highlight
@@ -50,10 +50,10 @@ module Octopress
   end
 end
 
-class Code < Octopress::Ink::Plugin
+class CodeHighlighter < Octopress::Ink::Plugin
   def initialize(name, type)
     @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
-    @version = Octopress::Code::VERSION
+    @version = Octopress::CodeHighlighter::VERSION
     @description = "For beautiful code snippets."
     super
   end
@@ -63,5 +63,5 @@ class Code < Octopress::Ink::Plugin
   end
 end
 
-Octopress::Ink.register_plugin(Code, 'octopress-code', 'plugin')
+Octopress::Ink.register_plugin(CodeHighlighter, 'octopress-code-highlighter', 'plugin')
 

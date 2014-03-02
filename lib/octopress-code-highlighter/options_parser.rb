@@ -1,5 +1,5 @@
 module Octopress
-  module Code
+  module CodeHighlighter
     class OptionsParser
       attr_accessor :input
 
@@ -126,3 +126,4 @@ module Octopress
     end
   end
 end
+

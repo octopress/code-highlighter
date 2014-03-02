@@ -1,6 +1,5 @@
-
 module Octopress
-  module Code
+  module CodeHighlighter
     class Renderer
       attr_reader :code, :options, :lang
 
@@ -35,7 +34,7 @@ module Octopress
           rendered_code = render
           rendered_code = encode_liquid(rendered_code)
           rendered_code = tableize_code(rendered_code)
-          rendered_code = "<figure class='octopress-code-figure'>#{caption}#{rendered_code}</figure>"
+          rendered_code = "<figure class='code-highlight-figure'>#{caption}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if options[:escape]
           Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
           rendered_code
@@ -69,12 +68,16 @@ module Octopress
 
       def render_pygments
         if lexer = Pygments::Lexer.find(lang) || Pygments::Lexer.find(@aliases[lang])
-          lexer.highlight @code, {
-            formatter: 'html',
-            options: {
-              encoding: 'utf-8'
+          begin
+            lexer.highlight @code, {
+              formatter: 'html',
+              options: {
+                encoding: 'utf-8'
+              }
             }
-          }
+          rescue MentosError => e
+            raise e
+          end
         else
           render_plain
         end
@@ -91,8 +94,8 @@ module Octopress
 
       def caption
         if options[:title]
-          figcaption  = "<figcaption class='octopress-code-caption'><span class='octopress-code-caption-title'>#{options[:title]}</span>"
-          figcaption += "<a class='octopress-code-caption-link' href='#{options[:url]}'>#{(options[:link_text] || 'link').strip}</a>" if options[:url]
+          figcaption  = "<figcaption class='code-highlight-caption'><span class='code-highlight-caption-title'>#{options[:title]}</span>"
+          figcaption += "<a class='code-highlight-caption-link' href='#{options[:url]}'>#{(options[:link_text] || 'link').strip}</a>" if options[:url]
           figcaption += "</figcaption>"
         else
           ''
@@ -104,10 +107,10 @@ module Octopress
         lines = options[:linenos]
         marks = options[:marks]
 
-        table = "<div class='octopress-code'>"
-        table += "<pre class='octopress-code-pre'>"
+        table = "<div class='code-highlight'>"
+        table += "<pre class='code-highlight-pre'>"
         code.lines.each_with_index do |line,index|
-          classes = 'octopress-code-row'
+          classes = 'code-highlight-row'
           classes += lines ? ' numbered' : ' unnumbered'
           if marks.include? index + start
             classes += ' marked-line'
@@ -115,7 +118,7 @@ module Octopress
             classes += ' end-marked-line' unless marks.include? index + 1 + start
           end
           line = line.strip.empty? ? ' ' : line
-          table += "<div data-line='#{index + start}' class='#{classes}'><div class='octopress-code-line'>#{line}</div></div>"
+          table += "<div data-line='#{index + start}' class='#{classes}'><div class='code-highlight-line'>#{line}</div></div>"
         end
         table +="</pre></div>"
       end
@@ -159,3 +162,4 @@ module Octopress
     end
   end
 end
+
