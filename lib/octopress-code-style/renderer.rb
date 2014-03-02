@@ -1,14 +1,13 @@
 module Octopress
   module CodeStyle
     class Renderer
-      attr_accessor :code, :options, :lang
+      attr_reader :code, :options, :lang
 
       def initialize(code, options = {})
         @code    = code
         @options = options.delete_if { |k,v| v.nil? }
         @options = DEFAULTS.merge(@options)
-        @aliases = @options[:aliases]
-        @aliases = (@aliases ? stringify_keys(@aliases) : {})
+        @aliases = stringify_keys(@options[:aliases] || {})
         @lang = @options[:lang]
       end
 
@@ -17,18 +16,18 @@ module Octopress
         if cache = Cache.read_cache(code, options)
           cache
         else
-          if options[:lang].empty? || options[:lang] == 'plain'
-            rendered_code = encode_liquid(code.gsub('<','&lt;')).to_s
-          else
-            rendered_code = render
-          end
+          rendered_code = (plain? ? code.gsub('<','&lt;') : render)
+          rendered_code = encode_liquid(rendered_code)
           rendered_code = tableize_code(rendered_code)
-          title = captionize(options[:title], options[:url], options[:link_text]) if options[:title]
-          rendered_code = "<figure class='octopress-code-figure'>#{title}#{rendered_code}</figure>"
+          rendered_code = "<figure class='octopress-code-figure'>#{caption}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if options[:escape]
           Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
           rendered_code
         end
+      end
+
+      def plain?
+        options[:lang].empty? || options[:lang] == 'plain'
       end
 
       def render
@@ -36,17 +35,20 @@ module Octopress
         lexer = Rouge::Lexers::PlainText unless lexer
         formatter = ::Rouge::Formatters::HTML.new()
         code = formatter.format(lexer.lex(@code))
-        code = code.match(/<pre.+?>(.+)<\/pre>/m)[1].strip #strip out divs <div class="highlight">
-        code = encode_liquid(code).to_s
+        code.match(/<pre.+?>(.+)<\/pre>/m)[1].strip #strip out divs <div class="highlight">
       end
 
-      def captionize (caption, url, link_text)
-        figcaption  = "<figcaption class='octopress-code-caption'><span class='octopress-code-caption-title'>#{caption}</span>"
-        figcaption += "<a class='octopress-code-caption-link' href='#{url}'>#{(link_text || 'link').strip}</a>" if url
-        figcaption += "</figcaption>"
+      def caption
+        if options[:title]
+          figcaption  = "<figcaption class='octopress-code-caption'><span class='octopress-code-caption-title'>#{opitons[:title]}</span>"
+          figcaption += "<a class='octopress-code-caption-link' href='#{options[:url]}'>#{(options[:link_text] || 'link').strip}</a>" if options[:url]
+          figcaption += "</figcaption>"
+        else
+          ''
+        end
       end
 
-      def tableize_code (code)
+      def tableize_code(code)
         start = options[:start]
         lines = options[:linenos]
         marks = options[:marks]
