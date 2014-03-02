@@ -1,5 +1,5 @@
 module Octopress
-  module CodeStyle
+  module Code
     class OptionsParser
       attr_accessor :input
 

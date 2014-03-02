@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Octopress::CodeStyle do
+describe Octopress::Code do
   let(:wrapper) do
     Proc.new do |stuff, numbers|
       [

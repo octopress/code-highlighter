@@ -1,15 +1,15 @@
-require "octopress-code-style/version"
+require 'octopress-code/version'
 require 'fileutils'
 require 'digest/md5'
 require 'rouge'
 require 'colorator'
 require 'octopress-ink'
 
-CODESTYLE_CACHE_DIR = '.code-style-cache'
-FileUtils.mkdir_p(CODESTYLE_CACHE_DIR)
+CODE_CACHE_DIR = '.code-cache'
+FileUtils.mkdir_p(CODE_CACHE_DIR)
 
 module Octopress
-  module CodeStyle
+  module Code
     DEFAULTS = {
       lang: 'plain',
       linenos: true,
@@ -17,11 +17,11 @@ module Octopress
       start: 1
     }
 
-    autoload :Cache,         'octopress-code-style/cache'
-    autoload :OptionsParser, 'octopress-code-style/options_parser'
-    autoload :Renderer,      'octopress-code-style/renderer'
+    autoload :Cache,         'octopress-code/cache'
+    autoload :OptionsParser, 'octopress-code/options_parser'
+    autoload :Renderer,      'octopress-code/renderer'
 
-    def self.highlight(code, options = {})
+    def self.highlight(code, options={})
       Renderer.new(code, options).highlight
     end
 
@@ -50,10 +50,10 @@ module Octopress
   end
 end
 
-class CodeStyle < Octopress::Ink::Plugin
+class Code < Octopress::Ink::Plugin
   def initialize(name, type)
     @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
-    @version = Octopress::CodeStyle::VERSION
+    @version = Octopress::Code::VERSION
     @description = "For beautiful code snippets."
     super
   end
@@ -63,5 +63,5 @@ class CodeStyle < Octopress::Ink::Plugin
   end
 end
 
-Octopress::Ink.register_plugin(CodeStyle, 'octopress-code-style', 'plugin')
+Octopress::Ink.register_plugin(Code, 'octopress-code', 'plugin')
 

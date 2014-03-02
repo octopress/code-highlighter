@@ -1,5 +1,5 @@
 module Octopress
-  module CodeStyle
+  module Code
     VERSION = "3.0.0"
   end
 end

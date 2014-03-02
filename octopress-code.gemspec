@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'octopress-code-style/version'
+require 'octopress-code/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "octopress-code-style"
-  gem.version       = Octopress::CodeStyle::VERSION
+  gem.name          = "octopress-code"
+  gem.version       = Octopress::Code::VERSION
   gem.authors       = ["Brandon Mathis"]
   gem.email         = ["brandon@imathis.com"]
   gem.description   = %q{Octopress's core plugin for rendering nice code blocks}

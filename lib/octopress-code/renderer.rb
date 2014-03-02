@@ -1,5 +1,5 @@
 module Octopress
-  module CodeStyle
+  module Code
     class Renderer
       attr_reader :code, :options, :lang
 
@@ -9,10 +9,10 @@ module Octopress
         @options = DEFAULTS.merge(@options)
         @aliases = stringify_keys(@options[:aliases] || {})
         @lang = @options[:lang]
+        @options[:title] ||= ' ' if @options[:url]
       end
 
       def highlight
-        options[:title] ||= ' ' if options[:url]
         if cache = Cache.read_cache(code, options)
           cache
         else
@@ -40,7 +40,7 @@ module Octopress
 
       def caption
         if options[:title]
-          figcaption  = "<figcaption class='octopress-code-caption'><span class='octopress-code-caption-title'>#{opitons[:title]}</span>"
+          figcaption  = "<figcaption class='octopress-code-caption'><span class='octopress-code-caption-title'>#{options[:title]}</span>"
           figcaption += "<a class='octopress-code-caption-link' href='#{options[:url]}'>#{(options[:link_text] || 'link').strip}</a>" if options[:url]
           figcaption += "</figcaption>"
         else
