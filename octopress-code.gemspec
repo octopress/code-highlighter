@@ -13,14 +13,13 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/octopress/octopress-pygments"
   gem.license       = "MIT"
 
-  #gem.add_runtime_dependency 'pygments.rb', '>= 0.5'
-  gem.add_runtime_dependency 'rouge', '~> 1.3.2'
   gem.add_runtime_dependency 'colorator', '~> 0.1.0'
   gem.add_runtime_dependency 'octopress-ink', '>= 1.0.0.alpha.33'
 
   gem.add_development_dependency 'pry-debugger'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rouge'
 
   gem.files         = `git ls-files`.split($/).reject {|f| f =~ /^demo\// }
   gem.require_paths = ["lib"]

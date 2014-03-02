@@ -1,3 +1,4 @@
+
 module Octopress
   module Code
     class Renderer
@@ -10,13 +11,28 @@ module Octopress
         @aliases = stringify_keys(@options[:aliases] || {})
         @lang = @options[:lang]
         @options[:title] ||= ' ' if @options[:url]
+        @renderer = select_renderer
+      end
+
+      def select_renderer
+        begin
+          require 'rouge'
+          return 'rouge' if defined?(Rouge)
+        rescue LoadError; end
+        begin
+          require 'pygments.rb'
+          return 'pygments' if defined?(Pygments)
+        rescue LoadError
+          puts "To highlight code, install the gem pygments.rb or rouge.".red
+          return 'plain'
+        end
       end
 
       def highlight
         if cache = Cache.read_cache(code, options)
           cache
         else
-          rendered_code = (plain? ? code.gsub('<','&lt;') : render)
+          rendered_code = render
           rendered_code = encode_liquid(rendered_code)
           rendered_code = tableize_code(rendered_code)
           rendered_code = "<figure class='octopress-code-figure'>#{caption}#{rendered_code}</figure>"
@@ -31,11 +47,46 @@ module Octopress
       end
 
       def render
-        lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.find(@aliases[lang])
-        lexer = Rouge::Lexers::PlainText unless lexer
-        formatter = ::Rouge::Formatters::HTML.new()
-        code = formatter.format(lexer.lex(@code))
-        code.match(/<pre.+?>(.+)<\/pre>/m)[1].strip #strip out divs <div class="highlight">
+        case @renderer
+        when 'pygments'
+          code = render_pygments
+        when 'rouge'
+          code = render_rouge
+        else
+          code = render_plain
+        end
+
+        if code =~ /<pre.+?>(.+)<\/pre>/m
+          $1.strip
+        else
+          code
+        end
+      end
+
+      def render_plain
+        @code.gsub('<','&lt;') 
+      end
+
+      def render_pygments
+        if lexer = Pygments::Lexer.find(lang) || Pygments::Lexer.find(@aliases[lang])
+          lexer.highlight @code, {
+            formatter: 'html',
+            options: {
+              encoding: 'utf-8'
+            }
+          }
+        else
+          render_plain
+        end
+      end
+
+      def render_rouge
+        if lexer = Rouge::Lexer.find(lang) || Rouge::Lexer.find(@aliases[lang])
+          formatter = ::Rouge::Formatters::HTML.new()
+          formatter.format(lexer.lex(@code))
+        else
+          render_plain
+        end
       end
 
       def caption

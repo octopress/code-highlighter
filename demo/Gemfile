@@ -5,6 +5,7 @@ group :jekyll_plugins do
   gem "octopress-ink", path: "../../ink"
   gem "octopress-code", path: "../"
   gem "octopress-codefence", path: "../../codefence"
+  gem "rouge"
 end
 
 gem "pry-debugger"

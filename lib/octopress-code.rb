@@ -1,7 +1,7 @@
 require 'octopress-code/version'
 require 'fileutils'
 require 'digest/md5'
-require 'rouge'
+
 require 'colorator'
 require 'octopress-ink'
 
