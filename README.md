@@ -1,6 +1,6 @@
 # Octopress CodeStyle
 
-[![Build Status](https://travis-ci.org/octopress/octopress-code-style.png)](https://travis-ci.org/octopress/octopress-code-style)
+[![Build Status](https://travis-ci.org/octopress/octopress-code-highlighter.png)](https://travis-ci.org/octopress/octopress-code-highlighter)
 
 TODO: Write a gem description
 
