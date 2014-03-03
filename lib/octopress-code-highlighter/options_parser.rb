@@ -1,8 +1,5 @@
-class String
-end
-
 module Octopress
-  module Pygments
+  module CodeHighlighter
     class OptionsParser
       attr_accessor :input
 
@@ -129,3 +126,4 @@ module Octopress
     end
   end
 end
+

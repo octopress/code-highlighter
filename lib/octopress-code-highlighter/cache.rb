@@ -1,19 +1,19 @@
 module Octopress
-  module Pygments
+  module CodeHighlighter
     class Cache
-      PYGMENTS_CACHE_DIR = '.pygments-cache'
+      CODE_CACHE_DIR = '.code-style-cache'
 
       class << self
         def read_cache(code, options)
           cache_label = options[:cache_label] || options[:lang] || ''
-          path = get_cache_path(PYGMENTS_CACHE_DIR, cache_label, options.to_s + code)
+          path = get_cache_path(CODE_CACHE_DIR, cache_label, options.to_s + code)
           File.exist?(path) ? File.read(path) : nil unless path.nil?
         end
 
         def write_to_cache(contents, options)
-          FileUtils.mkdir_p(PYGMENTS_CACHE_DIR) unless File.directory?(PYGMENTS_CACHE_DIR)
+          FileUtils.mkdir_p(CODE_CACHE_DIR) unless File.directory?(CODE_CACHE_DIR)
           cache_label = options[:cache_label] || options[:lang] || ''
-          path = get_cache_path(PYGMENTS_CACHE_DIR, cache_label, options.to_s + contents)
+          path = get_cache_path(CODE_CACHE_DIR, cache_label, options.to_s + contents)
           File.open(path, 'w') do |f|
             f.print(contents)
           end
@@ -27,3 +27,4 @@ module Octopress
     end
   end
 end
+

@@ -18,3 +18,4 @@ tmp
 .pygments-cache
 .sass-cache
 .DS_Store
+.code-style-cache

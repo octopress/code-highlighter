@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.0.0
+  - Changed name to octopress-code-highlighter.
+  - Now supporting both Pygments.rb and Rouge for highlighting.
+
+## 2.0.1
+  - Updated Octopress Ink version, added a simple demo project.
+
 ## 2.0.1
   - Updated Octopress Ink version, added a simple demo project.
 

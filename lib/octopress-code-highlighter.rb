@@ -1,15 +1,15 @@
-require "octopress-pygments/version"
+require 'octopress-code-highlighter/version'
 require 'fileutils'
 require 'digest/md5'
-require 'pygments'
+
 require 'colorator'
 require 'octopress-ink'
 
-PYGMENTS_CACHE_DIR = '.pygments-cache'
-FileUtils.mkdir_p(PYGMENTS_CACHE_DIR)
+CODE_CACHE_DIR = '.code-cache'
+FileUtils.mkdir_p(CODE_CACHE_DIR)
 
 module Octopress
-  module Pygments
+  module CodeHighlighter
     DEFAULTS = {
       lang: 'plain',
       linenos: true,
@@ -17,11 +17,11 @@ module Octopress
       start: 1
     }
 
-    autoload :Cache,         'octopress-pygments/cache'
-    autoload :OptionsParser, 'octopress-pygments/options_parser'
-    autoload :Renderer,      'octopress-pygments/renderer'
+    autoload :Cache,         'octopress-code-highlighter/cache'
+    autoload :OptionsParser, 'octopress-code-highlighter/options_parser'
+    autoload :Renderer,      'octopress-code-highlighter/renderer'
 
-    def self.highlight(code, options = {})
+    def self.highlight(code, options={})
       Renderer.new(code, options).highlight
     end
 
@@ -39,21 +39,21 @@ module Octopress
 
     def self.highlight_failed(error, syntax, markup, code, file = nil)
       code_snippet = code.split("\n")[0..9].map{|l| "    #{l}" }.join("\n")
-      fail_message  = "\nPygments Error while parsing the following markup#{" in #{file}" if file}:\n\n".red
+      fail_message  = "\nError while parsing the following markup#{" in #{file}" if file}:\n\n".red
       fail_message += "    #{markup}\n#{code_snippet}\n"
       fail_message += "#{"    ..." if code.split("\n").size > 10}\n"
       fail_message += "\nValid Syntax:\n\n#{syntax}\n".yellow
-      fail_message += "\nPygments Error:\n\n#{error.message}".red
+      fail_message += "\nError:\n\n#{error.message}".red
       $stderr.puts fail_message.chomp
       raise ArgumentError
     end
   end
 end
 
-class OctopressPygments < Octopress::Ink::Plugin
+class CodeHighlighter < Octopress::Ink::Plugin
   def initialize(name, type)
     @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
-    @version = Octopress::Pygments::VERSION
+    @version = Octopress::CodeHighlighter::VERSION
     @description = "For beautiful code snippets."
     super
   end
@@ -63,5 +63,5 @@ class OctopressPygments < Octopress::Ink::Plugin
   end
 end
 
-Octopress::Ink.register_plugin(OctopressPygments, 'octopress-pygments', 'plugin')
+Octopress::Ink.register_plugin(CodeHighlighter, 'octopress-code-highlighter', 'plugin')
 
