@@ -5,9 +5,6 @@ require 'digest/md5'
 require 'colorator'
 require 'octopress-ink'
 
-CODE_CACHE_DIR = '.code-cache'
-FileUtils.mkdir_p(CODE_CACHE_DIR)
-
 module Octopress
   module CodeHighlighter
     DEFAULTS = {

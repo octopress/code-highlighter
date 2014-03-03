@@ -1,7 +1,7 @@
 module Octopress
   module CodeHighlighter
     class Cache
-      CODE_CACHE_DIR = '.code-style-cache'
+      CODE_CACHE_DIR = '.code-highlighter-cache'
 
       class << self
         def read_cache(code, options)

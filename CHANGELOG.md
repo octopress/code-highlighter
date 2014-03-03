@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.0.1
+  - Changed name of cache dir to .code-highlighter-cache.
+
 ## 3.0.0
   - Changed name to octopress-code-highlighter.
   - Now supporting both Pygments.rb and Rouge for highlighting.
