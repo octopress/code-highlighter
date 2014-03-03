@@ -1,8 +1,8 @@
-# Octopress CodeStyle
+# Octopress Code Highlighter
 
 [![Build Status](https://travis-ci.org/octopress/code-highlighter.png)](https://travis-ci.org/octopress/code-highlighter)
 
-TODO: Write a gem description
+Generates highlighted code using Pygments.rb or Rouge with enanced HTML output and fancy stylesheets. This gem is used by [octopress-codefence](https://github.com/octopress/codefence) and [octopress-gist](https://github.com/octopress/octopress-gist).
 
 ## Installation
 
