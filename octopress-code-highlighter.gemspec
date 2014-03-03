@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["brandon@imathis.com"]
   gem.description   = %q{Octopress's core plugin for rendering nice code blocks}
   gem.summary       = %q{Octopress's core plugin for rendering nice code blocks}
-  gem.homepage      = "https://github.com/octopress/octopress-code-highlighter"
+  gem.homepage      = "https://github.com/octopress/code-highlighter"
   gem.license       = "MIT"
 
   gem.add_runtime_dependency 'colorator', '~> 0.1.0'
