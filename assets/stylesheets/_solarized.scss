@@ -27,28 +27,28 @@ $solar-scroll-thumb: rgba(#fff, .2);
 
 @if $solarized == light {
 
-  $_base03: $base03;
-  $_base02: $base02;
-  $_base01: $base01;
-  $_base00: $base00;
-  $_base0:  $base0;
-  $_base1:  $base1;
-  $_base2:  $base2;
-  $_base3:  $base3;
+  $_base03: $base03 !global;
+  $_base02: $base02 !global;
+  $_base01: $base01 !global;
+  $_base00: $base00 !global;
+  $_base0:  $base0 !global;
+  $_base1:  $base1 !global;
+  $_base2:  $base2 !global;
+  $_base3:  $base3 !global;
 
-  $base03:  $_base3;
-  $base02:  $_base2;
-  $base01:  $_base1;
-  $base00:  $_base0;
-  $base0:   $_base00;
-  $base1:   $_base01;
-  $base2:   $_base02;
-  $base3:   $_base03;
+  $base03:  $_base3 !global;
+  $base02:  $_base2 !global;
+  $base01:  $_base1 !global;
+  $base00:  $_base0 !global;
+  $base0:   $_base00 !global;
+  $base1:   $_base01 !global;
+  $base2:   $_base02 !global;
+  $base3:   $_base03 !global;
 
-  $solar-scroll-bg: rgba(#000, .15);
-  $solar-scroll-thumb: rgba(#000, .15);
+  $solar-scroll-bg: rgba(#000, .15) !global;
+  $solar-scroll-thumb: rgba(#000, .15) !global;
 
-  $marker-bg: rgba($marker, .05);
+  $marker-bg: rgba($marker, .05) !global;
 }
 
 $pre-bg: $base03 !default;

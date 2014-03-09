@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.0
+  - Updated stylesheets to be Sass 3.3 compatible.
+
 ## 3.0.1
   - Changed name of cache dir to .code-highlighter-cache.
 
