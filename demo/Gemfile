@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in jekyll-markdown-block.gemspec
 group :jekyll_plugins do
-  gem "octopress-ink", path: "../../ink"
   gem "octopress-code-highlighter", path: "../"
   gem "octopress-codefence", path: "../../codefence"
   gem "rouge"

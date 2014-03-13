@@ -7,7 +7,10 @@ module Octopress
         @code    = code
         @options = options.delete_if { |k,v| v.nil? }
         @options = DEFAULTS.merge(@options)
-        @aliases = stringify_keys(@options[:aliases] || {})
+        if defined? Ink
+          @aliases = Ink.config['code_aliases']
+        end
+        @aliases ||= stringify_keys(@options[:aliases] || {})
         @lang = @options[:lang]
         @options[:title] ||= ' ' if @options[:url]
         @renderer = select_renderer

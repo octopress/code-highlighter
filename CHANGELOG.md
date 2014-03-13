@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.0
+  - Removed stylesheets. Now use gem octopress-solarized for stylesheets.
+  - Removed dependency on Octopress Ink.
+
 ## 3.1.0
   - Updated stylesheets to be Sass 3.3 compatible.
 

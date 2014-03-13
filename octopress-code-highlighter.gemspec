@@ -14,7 +14,6 @@ Gem::Specification.new do |gem|
   gem.license       = "MIT"
 
   gem.add_runtime_dependency 'colorator', '~> 0.1.0'
-  gem.add_runtime_dependency 'octopress-ink', '>= 1.0.0.alpha.33'
 
   gem.add_development_dependency 'pry-debugger'
   gem.add_development_dependency 'rake'

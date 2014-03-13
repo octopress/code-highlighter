@@ -3,7 +3,9 @@ require 'fileutils'
 require 'digest/md5'
 
 require 'colorator'
-require 'octopress-ink'
+
+begin require 'octopress-ink'
+rescue LoadError; end
 
 module Octopress
   module CodeHighlighter
@@ -46,19 +48,4 @@ module Octopress
     end
   end
 end
-
-class CodeHighlighter < Octopress::Ink::Plugin
-  def initialize(name, type)
-    @assets_path = File.expand_path(File.join(File.dirname(__FILE__), '../assets'))
-    @version = Octopress::CodeHighlighter::VERSION
-    @description = "For beautiful code snippets."
-    super
-  end
-
-  def add_assets
-    add_sass 'code.scss'
-  end
-end
-
-Octopress::Ink.register_plugin(CodeHighlighter, 'octopress-code-highlighter', 'plugin')
 
