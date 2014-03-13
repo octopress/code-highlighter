@@ -7,7 +7,9 @@ module Octopress
         @code    = code
         @options = options.delete_if { |k,v| v.nil? }
         @options = DEFAULTS.merge(@options)
-        if defined? Ink
+        if defined? Octopress.config
+          @aliases = Octopress.config['code_aliases']
+        elsif defined? Ink
           @aliases = Ink.config['code_aliases']
         end
         @aliases ||= stringify_keys(@options[:aliases] || {})

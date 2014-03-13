@@ -4,6 +4,9 @@ require 'digest/md5'
 
 require 'colorator'
 
+begin require 'octopress'
+rescue LoadError; end
+
 begin require 'octopress-ink'
 rescue LoadError; end
 

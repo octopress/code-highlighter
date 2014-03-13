@@ -4,3 +4,6 @@ sass:
   style: compressed
 gems:
   - octopress-codefence
+
+code_aliases:
+  fooooo: ruby
