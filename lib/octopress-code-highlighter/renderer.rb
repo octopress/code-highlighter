@@ -19,17 +19,23 @@ module Octopress
       end
 
       def select_renderer
-        begin
-          require 'rouge'
-          return 'rouge' if defined?(Rouge)
-        rescue LoadError; end
-        begin
-          require 'pygments.rb'
-          return 'pygments' if defined?(Pygments)
-        rescue LoadError
-          puts "To highlight code, install the gem pygments.rb or rouge.".red
-          return 'plain'
+        case true
+          when renderer_available?('rouge')
+            require 'rouge'
+            return  'rouge'
+          when renderer_available?('pygments.rb')
+            require 'pygments'
+            return  'pygments'
+        else
+          $stderr.puts 'No syntax highlighting:'.yellow
+          $stderr.puts "\tInstall pygments.rb, rouge".yellow
         end
+  
+        'plain'
+      end
+      
+      def renderer_available?(which)
+        Gem::Specification::find_all_by_name(which).any?
       end
 
       def highlight
