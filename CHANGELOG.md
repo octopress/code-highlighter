@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.2
+  - Fixed: end of range now works properly.
+
 ## 4.0.1
   - Changed `get_range` method to `select_lines` which returns a code partial when `start`, `end` or `range` options are defined.
 

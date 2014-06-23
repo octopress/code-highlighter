@@ -49,7 +49,8 @@ module Octopress
       if start > 1 or endline < length
         raise "Code is #{length} lines long, cannot begin at line #{start}." if start > length
         raise "Code lines starting line #{start} cannot be after ending line #{endline}." if start > endline
-        code = code.lines[(start - 1), (endline + 1)].join
+        range = Range.new(start - 1, endline - 1)
+        code = code.lines[range].join
       end
       code
     end
