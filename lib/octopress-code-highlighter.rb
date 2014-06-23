@@ -39,6 +39,21 @@ module Octopress
       OptionsParser.new(input).clean_markup
     end
 
+    # Return a code partial when start, end, or range options are defined
+    #
+    def self.select_lines(code, options)
+      length   = code.lines.count
+      start    = options[:start] || 1
+      endline  = options[:end] || length
+
+      if start > 1 or endline < length
+        raise "Code is #{length} lines long, cannot begin at line #{start}." if start > length
+        raise "Code lines starting line #{start} cannot be after ending line #{endline}." if start > endline
+        code = code.lines[(start - 1), (endline + 1)].join
+      end
+      code
+    end
+
     def self.highlight_failed(error, syntax, markup, code, file = nil)
       code_snippet = code.split("\n")[0..9].map{|l| "    #{l}" }.join("\n")
       fail_message  = "\nError while parsing the following markup#{" in #{file}" if file}:\n\n".red

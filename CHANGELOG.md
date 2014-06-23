@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.1
+  - Changed `get_range` method to `select_lines` which returns a code partial when `start`, `end` or `range` options are defined.
+
 ## 4.0.0
   - Removed stylesheets. Now use gem octopress-solarized for stylesheets.
   - Removed dependency on Octopress Ink.

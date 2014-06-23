@@ -139,12 +139,12 @@ module Octopress
       #
       def get_range(code, start, endline)
         length    = code.lines.count
-        start
+        start   ||= 1
         endline ||= length
         if start > 1 or endline < length
           raise "#{filepath} is #{length} lines long, cannot begin at line #{start}" if start > length
           raise "#{filepath} is #{length} lines long, cannot read beyond line #{endline}" if endline > length
-          code = code.split(/\n/).slice(start - 1, endline + 1 - start).join("\n")
+          code = code.split(/\n/).slice(start - 1, endline + 1).join("\n")
         end
         code
       end
