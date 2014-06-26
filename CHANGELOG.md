@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.3 - 2014-06-26
+  - Fixed: Improved escaping characters for Liquid.
+
 ## 4.0.2
   - Fixed: end of range now works properly.
 

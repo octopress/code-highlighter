@@ -43,7 +43,7 @@ module Octopress
           cache
         else
           rendered_code = render
-          rendered_code = encode_liquid(rendered_code)
+          rendered_code = escape_characters(rendered_code)
           rendered_code = tableize_code(rendered_code)
           rendered_code = "<figure class='code-highlight-figure'>#{caption}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if options[:escape]
@@ -149,9 +149,8 @@ module Octopress
         code
       end
 
-      def encode_liquid(code)
-        code.gsub(/{{/, '&#x7b;&#x7b;')
-          .gsub(/{%/, '&#x7b;&#x25;')
+      def escape_characters(code)
+        code.gsub(/{/, '&#x7b;').gsub(/}/, '&#x7d;')
       end
 
       private
