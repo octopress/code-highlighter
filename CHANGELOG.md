@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.1.0 - 2014-06-27
+  - Added support for setting PHP's startinline option (now defaults to true).
+
 ## 4.0.3 - 2014-06-26
   - Fixed: Improved escaping characters for Liquid.
 
