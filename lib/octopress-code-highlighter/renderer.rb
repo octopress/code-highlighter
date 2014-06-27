@@ -80,11 +80,13 @@ module Octopress
       def render_pygments
         if lexer = Pygments::Lexer.find(lang) || Pygments::Lexer.find(@aliases[lang])
           begin
+            options = { encoding: 'utf-8' }
+            if lang =~ /php/ 
+              options[:startinline] = @options[:startinline] || true
+            end
             lexer.highlight @code, {
               formatter: 'html',
-              options: {
-                encoding: 'utf-8'
-              }
+              options: options
             }
           rescue MentosError => e
             raise e

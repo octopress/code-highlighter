@@ -18,6 +18,7 @@ module Octopress
           .sub(/\s*end:\s*\d+/i,'')
           .sub(/\s*range:\s*\d+-\d+/i,'')
           .sub(/\s*escape:\s*\w+/i,'')
+          .sub(/\s*startinline:\s*\w+/i,'')
       end
 
       def parse_markup(defaults = {})
@@ -30,7 +31,8 @@ module Octopress
           link_text: link_text,
           start:     start,
           end:       endline,
-          escape:    escape
+          escape:    escape,
+          startinline: startinline
         }
         options = options.delete_if { |k,v| v.nil? }
         defaults.merge(options)
@@ -38,6 +40,10 @@ module Octopress
       
       def lang
         extract(/\s*lang:\s*(\S+)/i)
+      end
+
+      def startinline
+        boolize(extract(/\s*startinline:\s*(\w+)/i))
       end
 
       def url
