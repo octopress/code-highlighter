@@ -49,8 +49,7 @@ module Octopress
       end
 
       def classnames
-        classes = extract(/\s*class:\s*(("(.+?)")|('(.+?)')|(\S+))/i, [3, 5, 6]) || ''
-        classes.gsub(/[,.]\s*/, ' ')
+        extract(/\s*class:\s*(("(.+?)")|('(.+?)')|(\S+))/i, [3, 5, 6])
       end
 
       def url

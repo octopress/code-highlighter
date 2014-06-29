@@ -27,7 +27,7 @@ EOF
 
   let(:expected_output_lang_ruby) do
     stuff = <<-EOF
-{% raw %}<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s2">"hi-there-honey"</span>
+{% raw %}<figure class='code-highlight-figure awesome'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s2">"hi-there-honey"</span>
 </div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
 </div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="no">HiThereHoney</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"your name"</span><span class="p">)</span>
 </div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
@@ -103,7 +103,7 @@ EOF
 
     context "with a language" do
       it "returns the right HTML for a given set of code" do
-        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: true })).to eql(expected_output_lang_ruby.chop)
+        expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: true, class: 'awesome' })).to eql(expected_output_lang_ruby.chop)
       end
     end
   end
