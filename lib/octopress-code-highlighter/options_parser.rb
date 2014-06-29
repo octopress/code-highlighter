@@ -19,6 +19,7 @@ module Octopress
           .sub(/\s*range:\s*\d+-\d+/i,'')
           .sub(/\s*escape:\s*\w+/i,'')
           .sub(/\s*startinline:\s*\w+/i,'')
+          .sub(/\s*class:\s*(("(.+?)")|('(.+?)')|(\S+))/i,'')
       end
 
       def parse_markup(defaults = {})
@@ -32,7 +33,8 @@ module Octopress
           start:     start,
           end:       endline,
           escape:    escape,
-          startinline: startinline
+          startinline: startinline,
+          class:     classnames
         }
         options = options.delete_if { |k,v| v.nil? }
         defaults.merge(options)
@@ -44,6 +46,11 @@ module Octopress
 
       def startinline
         boolize(extract(/\s*startinline:\s*(\w+)/i))
+      end
+
+      def classnames
+        classes = extract(/\s*class:\s*(("(.+?)")|('(.+?)')|(\S+))/i, [3, 5, 6]) || ''
+        classes.gsub(/[,.]\s*/, ' ')
       end
 
       def url

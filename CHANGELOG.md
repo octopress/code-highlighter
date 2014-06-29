@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.0 - 2014-06-28
+  - New: Add classnames on code figure: `class:"example classnames"`.
+
 ## 4.1.0 - 2014-06-27
   - Added support for setting PHP's startinline option (now defaults to true).
 

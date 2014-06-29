@@ -13,12 +13,12 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/octopress/code-highlighter"
   gem.license       = "MIT"
 
-  gem.add_runtime_dependency 'colorator', '~> 0.1.0'
+  gem.add_runtime_dependency 'colorator', '~> 0.1'
 
   gem.add_development_dependency 'pry-debugger'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'rouge', '~> 1.3.2'
+  gem.add_development_dependency 'rouge', '~> 1.3'
 
   gem.files         = `git ls-files`.split($/).reject {|f| f =~ /^demo\// }
   gem.require_paths = ["lib"]

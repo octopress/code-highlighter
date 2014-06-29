@@ -45,7 +45,7 @@ module Octopress
           rendered_code = render
           rendered_code = escape_characters(rendered_code)
           rendered_code = tableize_code(rendered_code)
-          rendered_code = "<figure class='code-highlight-figure'>#{caption}#{rendered_code}</figure>"
+          rendered_code = "<figure class='code-highlight-figure#{' ' + options[:class]}'>#{caption}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if options[:escape]
           Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
           rendered_code
