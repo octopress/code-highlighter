@@ -14,12 +14,12 @@ describe Octopress::CodeHighlighter do
 
   let(:expected_output_no_options) do
     stuff = <<-EOF
-<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>    require "hi-there-honey"
-</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    def hi-there-honey
-</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      HiThereHoney.new("your name")
-</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    end
-</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    hi-there-honey
-</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    # =>  "Hi, your name"
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'>require "hi-there-honey"
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>def hi-there-honey
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  HiThereHoney.new("your name")
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>end
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>hi-there-honey
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'># =>  "Hi, your name"
 </div></div></pre></div></figure>
 EOF
     stuff.strip
@@ -28,24 +28,25 @@ EOF
   let(:expected_output_lang_ruby) do
     stuff = <<-EOF
 {% raw %}<figure class='code-highlight-figure awesome'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="nb">require</span> <span class="s2">"hi-there-honey"</span>
-</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>      <span class="no">HiThereHoney</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"your name"</span><span class="p">)</span>
-</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="k">end</span>
-</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
-</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'>    <span class="c1"># =&gt;  "Hi, your name"</span></div></div></pre></div></figure>{% endraw %}
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">def</span> <span class="nf">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='4' class='code-highlight-row numbered'><div class='code-highlight-line'>  <span class="no">HiThereHoney</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"your name"</span><span class="p">)</span>
+</div></div><div data-line='5' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="k">end</span>
+</div></div><div data-line='6' class='code-highlight-row numbered'><div class='code-highlight-line'> </div></div><div data-line='7' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="n">hi</span><span class="o">-</span><span class="n">there</span><span class="o">-</span><span class="n">honey</span>
+</div></div><div data-line='8' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="c1"># =&gt;  "Hi, your name"</span>
+</div></div></pre></div></figure>{% endraw %}
 EOF
   end
 
   let(:code) do
     <<-EOF
-    require "hi-there-honey"
+require "hi-there-honey"
 
-    def hi-there-honey
-      HiThereHoney.new("your name")
-    end
+def hi-there-honey
+  HiThereHoney.new("your name")
+end
 
-    hi-there-honey
-    # =>  "Hi, your name"
+hi-there-honey
+# =>  "Hi, your name"
     EOF
   end
 
