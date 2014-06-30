@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.1 - 2014-06-29
+  - Improved support for new Pygments.rb.
+
 ## 4.2.0 - 2014-06-28
   - New: Add classnames on code figure: `class:"example classnames"`.
 

@@ -70,11 +70,11 @@ module Octopress
           code = render_plain
         end
 
-        if code =~ /<pre.+?>(.+)<\/pre>/m
-          $1.strip
-        else
-          code
+        if code =~ /<pre.*?>(.+?)<\/pre>/m
+          code = $1.strip
         end
+
+        code
       end
 
       def render_plain
