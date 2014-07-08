@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.2 - 2014-07-07
+  - Fixed: Closing spans aren't wrapped to a newline.
+  
 ## 4.2.1 - 2014-06-29
   - Improved support for new Pygments.rb.
 
