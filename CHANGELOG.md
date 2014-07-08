@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.3 - 2014-07-08
+  - Fixed: Code ranges now work on ruby 1.9.3
+  
 ## 4.2.2 - 2014-07-07
   - Fixed: Closing spans aren't wrapped to a newline.
   
