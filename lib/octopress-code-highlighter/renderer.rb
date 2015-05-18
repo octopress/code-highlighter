@@ -51,7 +51,7 @@ module Octopress
           end
           rendered_code = "<figure class='#{classnames}'>#{caption}#{rendered_code}</figure>"
           rendered_code = "{% raw %}#{rendered_code}{% endraw %}" if options[:escape]
-          Cache.write_to_cache(rendered_code, options) unless options[:no_cache]
+          Cache.write_to_cache(rendered_code, code, options) unless options[:no_cache]
           rendered_code
         end
       end

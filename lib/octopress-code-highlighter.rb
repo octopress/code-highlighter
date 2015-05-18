@@ -7,8 +7,12 @@ require 'colorator'
 begin require 'octopress'
 rescue LoadError; end
 
+require 'octopress-code-highlighter/hooks'
+
 begin require 'octopress-ink'
 rescue LoadError; end
+
+require 'octopress-code-highlighter/cache'
 
 module Octopress
   module CodeHighlighter
@@ -19,7 +23,8 @@ module Octopress
       start: 1
     }
 
-    autoload :Cache,         'octopress-code-highlighter/cache'
+    CODE_CACHE_DIR = '.code-highlighter-cache'
+
     autoload :OptionsParser, 'octopress-code-highlighter/options_parser'
     autoload :Renderer,      'octopress-code-highlighter/renderer'
 
@@ -67,4 +72,3 @@ module Octopress
     end
   end
 end
-
