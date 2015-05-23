@@ -4,23 +4,12 @@
 
 Generates highlighted code using Pygments.rb or Rouge with enanced HTML output and fancy stylesheets. This gem is used by [octopress-codefence](https://github.com/octopress/codefence) and [octopress-gist](https://github.com/octopress/octopress-gist).
 
-## Installation
+## Usage Note
 
-Add this line to your application's Gemfile:
+This plugin is really a library plugin, handling the heavy lifting for generating nice code snippets. If you want to add nice code snippets to your Jekyll site,
+you probably want [octopress-codefence](https://github.com/octopress/codefence), [octopress-render-code](https://github.com/octopress/render-code), [octopress-codeblock](https://github.com/octopress/codeblock), or [octopress-gist](https://github.com/octopress/gist).
 
-    gem 'octopress-code-style'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install octopress-code-style
-
-## Usage
-
-TODO: Write usage instructions here
+If you want to style highlighted code markup, check out [octopress-solarized](https://github.com/octopress/solarized).
 
 ## Contributing
 

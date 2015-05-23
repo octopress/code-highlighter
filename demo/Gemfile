@@ -4,8 +4,8 @@ source 'https://rubygems.org'
 group :jekyll_plugins do
   #gem "octopress"
   gem "octopress-code-highlighter", path: "../"
-  gem "octopress-codefence", path: "../../codefence"
+  gem "octopress-codefence"
   gem "rouge"
 end
 
-gem "pry-debugger"
+gem "pry-byebug"
