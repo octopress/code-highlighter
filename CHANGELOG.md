@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.2.6 - 2015-05-29
+- Fix: Find enumerators on non-existent directories threw errors. 
+
 ## 4.2.5 - 2015-05-29
 - Fix: Code cache doesn't attempt cleanup if there is no cache.
 
