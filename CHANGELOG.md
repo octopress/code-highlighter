@@ -1,6 +1,9 @@
 # Changelog
 
-## 4.2.3 - 2015-05-18
+## 4.2.5 - 2015-05-29
+- Fix: Code cache doesn't attempt cleanup if there is no cache.
+
+## 4.2.4 - 2015-05-18
 - New: Now works with Jekyll 3 and Jekyll Hooks.
 - Fix: Cache reads and writes do not trigger Jekyll watcher.
 - Fix: Cache fingerprinting improvement.

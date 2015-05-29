@@ -38,8 +38,10 @@ module Octopress
       end
 
       def clean
-        remove = Find.find(CODE_CACHE_DIR).to_a.reject do |file|
-          @cached_files.include?(file) || File.directory?(file)
+        remove = []
+
+        Find.find(CODE_CACHE_DIR).each do |file|
+          remove << file unless @cached_files.include?(file) || File.directory?(file)
         end
 
         @cached_files = []
