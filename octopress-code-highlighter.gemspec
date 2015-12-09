@@ -12,8 +12,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/octopress/code-highlighter"
   gem.license       = "MIT"
 
-  gem.add_runtime_dependency 'colorator', '~> 0.1'
-  gem.add_runtime_dependency 'octopress-hooks'
+  gem.add_runtime_dependency 'jekyll', '~> 3.0'
 
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec'

@@ -1,6 +1,7 @@
 require 'octopress-code-highlighter/version'
 require 'fileutils'
 require 'digest/md5'
+require 'jekyll'
 
 require 'colorator'
 

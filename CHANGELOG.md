@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.3.0 - 2015-12-09
+- Now supporting Jekyll 3+
+
 ## 4.2.6 - 2015-05-29
 - Fix: Find enumerators on non-existent directories threw errors. 
 
