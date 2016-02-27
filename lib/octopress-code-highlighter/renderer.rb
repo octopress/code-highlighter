@@ -20,12 +20,12 @@ module Octopress
 
       def select_renderer
         case true
-          when renderer_available?('rouge')
-            require 'rouge'
-            return  'rouge'
           when renderer_available?('pygments.rb')
             require 'pygments'
             return  'pygments'
+          when renderer_available?('rouge')
+            require 'rouge'
+            return  'rouge'
         else
           $stderr.puts 'No syntax highlighting:'.yellow
           $stderr.puts "\tInstall pygments.rb, rouge".yellow
