@@ -37,6 +37,15 @@ EOF
 EOF
   end
 
+  let(:expected_output_lang_json) do
+    <<-EOF
+<figure class='code-highlight-figure'><div class='code-highlight'><pre class='code-highlight-pre'><div data-line='1' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7b;</span><span class="w"></span>
+</div></div><div data-line='2' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="w">  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code-highlihting"</span><span class="w"></span>
+</div></div><div data-line='3' class='code-highlight-row numbered'><div class='code-highlight-line'><span class="p">&#x7d;</span><span class="w"></span>
+</div></div></pre></div></figure>
+EOF
+  end
+
   let(:code) do
     <<-EOF
 require "hi-there-honey"
@@ -48,6 +57,14 @@ end
 hi-there-honey
 # =>  "Hi, your name"
     EOF
+  end
+
+  let(:json) do
+    <<-EOF
+{
+  "name": "code-highlihting"
+}
+EOF
   end
 
   let(:markup) do
@@ -105,6 +122,12 @@ hi-there-honey
     context "with a language" do
       it "returns the right HTML for a given set of code" do
         expect(described_class.highlight(code, { lang: 'abc', aliases: {'abc'=>'ruby'}, escape: true, class: 'awesome' })).to eql(expected_output_lang_ruby.chop)
+      end
+    end
+
+    context "with multi-line spans" do
+      it "splits the spans into their own lines" do
+        expect(described_class.highlight(json, { lang: 'json' })).to eql(expected_output_lang_json.chomp)
       end
     end
   end
