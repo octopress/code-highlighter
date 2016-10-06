@@ -1,3 +1,5 @@
+require_relative "span_splitter"
+
 module Octopress
   module CodeHighlighter
     class Renderer
@@ -30,10 +32,10 @@ module Octopress
           $stderr.puts 'No syntax highlighting:'.yellow
           $stderr.puts "\tInstall pygments.rb, rouge".yellow
         end
-  
+
         'plain'
       end
-      
+
       def renderer_available?(which)
         Gem::Specification::find_all_by_name(which).any?
       end
@@ -44,6 +46,7 @@ module Octopress
         else
           rendered_code = render
           rendered_code = escape_characters(rendered_code)
+          rendered_code = SpanSplitter.split(rendered_code)
           rendered_code = tableize_code(rendered_code)
           classnames = 'code-highlight-figure'
           if options[:class]
@@ -79,14 +82,14 @@ module Octopress
       end
 
       def render_plain
-        @code.gsub('<','&lt;') 
+        @code.gsub('<','&lt;')
       end
 
       def render_pygments
         if lexer = Pygments::Lexer.find(lang) || Pygments::Lexer.find(@aliases[lang])
           begin
             options = { encoding: 'utf-8' }
-            if lang =~ /php/ 
+            if lang =~ /php/
               options[:startinline] = @options[:startinline] || true
             end
             lexer.highlight @code, {
@@ -179,4 +182,3 @@ module Octopress
     end
   end
 end
-
